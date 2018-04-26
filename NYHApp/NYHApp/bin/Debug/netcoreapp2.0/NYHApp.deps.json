@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "76f3e4cd8ffd47b4577ea67b8d07f076534ba846"
+    "signature": "3deef077b3fff8efc999126fef2db67330099df2"
   },
   "compilationOptions": {
     "defines": [
@@ -24,26 +24,31 @@
       "NYHApp/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.2.0",
-          "Microsoft.AspNetCore.All": "2.0.6",
+          "Microsoft.AspNetCore.All": "2.0.7",
           "Microsoft.EntityFrameworkCore.Tools": "2.0.2",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
           "Microsoft.jQuery.Unobtrusive.Validation": "3.2.9",
-          "bootstrap": "4.0.0",
+          "bootstrap": "4.1.0",
           "jQuery": "3.3.1",
           "jQuery.Validation": "1.17.0"
         },
         "runtime": {
           "NYHApp.dll": {}
         },
+        "resources": {
+          "en/NYHApp.resources.dll": {
+            "locale": "en"
+          }
+        },
         "compile": {
           "NYHApp.dll": {}
         }
       },
-      "bootstrap/4.0.0": {
+      "bootstrap/4.1.0": {
         "dependencies": {
           "jQuery": "3.3.1",
-          "popper.js": "1.12.9"
+          "popper.js": "1.14.0"
         }
       },
       "EntityFramework/6.2.0": {
@@ -174,7 +179,7 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.dll": {}
         }
       },
-      "Microsoft.AspNetCore.All/2.0.6": {
+      "Microsoft.AspNetCore.All/2.0.7": {
         "dependencies": {
           "Microsoft.AspNetCore": "2.0.2",
           "Microsoft.AspNetCore.Antiforgery": "2.0.2",
@@ -2536,7 +2541,7 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
-      "popper.js/1.12.9": {},
+      "popper.js/1.14.0": {},
       "Remotion.Linq/2.1.1": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -4272,12 +4277,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "bootstrap/4.0.0": {
+    "bootstrap/4.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aW3kJMmptC2GD4+hIa3x3fSrPF4VkrWQ2PRBEJg+o7lMRMi7u4UW9igY/GP02/wrIpH/CusL+mQIM42YhvA3XQ==",
-      "path": "bootstrap/4.0.0",
-      "hashPath": "bootstrap.4.0.0.nupkg.sha512"
+      "sha512": "sha512-MpThvC2aO+DVfGP76J4TBIZ23pwyIkcGp2miNvQITqjNoGwLtGfY7pRU1u33Ot/7DU20LY2Ur6ZYlM0KGtCglg==",
+      "path": "bootstrap/4.1.0",
+      "hashPath": "bootstrap.4.1.0.nupkg.sha512"
     },
     "EntityFramework/6.2.0": {
       "type": "package",
@@ -4335,12 +4340,12 @@
       "path": "microsoft.aspnetcore/2.0.2",
       "hashPath": "microsoft.aspnetcore.2.0.2.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.All/2.0.6": {
+    "Microsoft.AspNetCore.All/2.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5AEYk4hS25RcPkh1kWeKpn487/9Bb3GeVfu8Sl7EOFv9ADXmz7ypVyVlp8FMwgQIJSykzy6kF6KOOduhrWGmSA==",
-      "path": "microsoft.aspnetcore.all/2.0.6",
-      "hashPath": "microsoft.aspnetcore.all.2.0.6.nupkg.sha512"
+      "sha512": "sha512-hpWBRgs094P0jBWJRqBV+8oXl6G+O5ixDAgXI5qouOsg2jlLOmYr1+95+lRbLSn31HhKbQdNel6VQSDUbm0juw==",
+      "path": "microsoft.aspnetcore.all/2.0.7",
+      "hashPath": "microsoft.aspnetcore.all.2.0.7.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.0.2": {
       "type": "package",
@@ -5532,12 +5537,12 @@
       "path": "nuget.frameworks/4.0.0",
       "hashPath": "nuget.frameworks.4.0.0.nupkg.sha512"
     },
-    "popper.js/1.12.9": {
+    "popper.js/1.14.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WfoI8YXFx31zr8w6AvYMmqKihR3a/wLc5wBhu41ApgBukTM8C2UHNSRFrO6485SDQ/HKoSn9yiEMgfBx1LVNNw==",
-      "path": "popper.js/1.12.9",
-      "hashPath": "popper.js.1.12.9.nupkg.sha512"
+      "sha512": "sha512-SPxZdXknelgQ015wey7GMZvsVdt/SyEmHYORhEp5k/uF9MUk9DPtkn+6dR98fud2hVWJjZm9KKr474+r7WQt+A==",
+      "path": "popper.js/1.14.0",
+      "hashPath": "popper.js.1.14.0.nupkg.sha512"
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",

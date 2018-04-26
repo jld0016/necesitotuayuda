@@ -1,0 +1,7 @@
+Enterprise
+
+Cada empresa podrá tener uno o varios usuarios ligados a ella. 
+Uno de ellos será un usuario Administrador de la empresa y será el encargado de realizar las diferentes ofertas.
+
+
+Para cada ayudan tener un boton en el que se incluyan datos personales del usuario

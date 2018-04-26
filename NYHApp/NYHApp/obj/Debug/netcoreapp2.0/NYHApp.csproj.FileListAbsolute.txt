@@ -10,3 +10,14 @@ C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.AssemblyInfo.cs
 C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.dll
 C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.pdb
 C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\NeedYourHelp\NYHApp\NYHApp\bin\Debug\netcoreapp2.0\en\NYHApp.resources.dll
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Account.Resource.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Home.Resource.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Account.Resource.en.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Home.Resource.en.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.csproj.GenerateResource.cache
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\en\NYHApp.resources.dll
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Enterprise.Resource.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Help.Resource.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Enterprise.Resource.en.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Help.Resource.en.resources

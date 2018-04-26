@@ -4,14 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NYHApp.Data;
 using NYHApp.Models;
 
 namespace NYHApp.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public IActionResult Index()
         {
+            List<Help> Listado = db.Helps.ToList();
             return View();
         }
 
