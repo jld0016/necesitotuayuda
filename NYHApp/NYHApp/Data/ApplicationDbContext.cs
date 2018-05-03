@@ -17,22 +17,24 @@ namespace NYHApp.Data
 
         public DbSet<Help> Helps { get; set; }
 
+        public DbSet<Enterprise> Enterprises { get; set; }
+
+        public DbSet<LineProposal> LinesProposals { get; set; }
+
+        public DbSet<Proposal> Proposals { get; set; }
+
+        public DbSet<Photo> Photos { get; set; }
+
         public DbSet<ApplicationRoleGroup> RolesGroups { get; set; }
 
         public DbSet<ApplicationGroup> Groups { get; set; }
 
         public DbSet<ApplicationUser> Users { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
         {
         }
-
-        public ApplicationDbContext()
-        {
-        }
-
-        public static ApplicationDbContext Create() => new ApplicationDbContext();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +45,9 @@ namespace NYHApp.Data
 
             UsersConfiguration(modelBuilder);
             EnterpriseConfiguration(modelBuilder);
+            HelpConfiguration(modelBuilder);
+            PhotoConfiguration(modelBuilder);
+            ProposalConfiguration(modelBuilder);
         }
 
         private void UsersConfiguration(ModelBuilder modelBuilder)
@@ -74,8 +79,30 @@ namespace NYHApp.Data
 
         private void HelpConfiguration(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Help>().HasOne(f => f.UserHelp).WithMany(f => f.Helps).HasForeignKey(f => f.IdUser).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Help>().HasOne(f => f.Province).WithMany(z => z.Helps).HasForeignKey(z => z.IdProvince);
+            modelBuilder.Entity<Help>().HasOne(f => f.Country).WithMany(z => z.Helps).HasForeignKey(f => f.IdCountry);
+            modelBuilder.Entity<Help>().HasOne(f => f.TypeRoad).WithMany().HasForeignKey(f => f.IdTypeRoad);
+            modelBuilder.Entity<Help>().HasOne(f => f.UserHelp).WithMany(f => f.Helps).HasForeignKey(f => f.IdUser).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Help>().HasOne(f => f.UserLastModified).WithMany().HasForeignKey(f => f.IdUserLastModified);
+        }
+
+        private void PhotoConfiguration(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Photo>().HasOne(f => f.Help).WithMany(f => f.Photos).HasForeignKey(f => f.IdHelp).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Photo>().HasOne(f => f.UserLastModified).WithMany().HasForeignKey(f => f.IdUserLastModified);
+        }
+
+        private void ProposalConfiguration(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Proposal>().HasOne(f => f.Help).WithMany(z=>z.Proposals).HasForeignKey(f => f.IdHelp).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Proposal>().HasOne(f => f.Enterprise).WithMany(z => z.Proposals).HasForeignKey(f => f.IdEnterprise).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Proposal>().HasOne(f => f.UserLastModified).WithMany().HasForeignKey(f => f.IdUserLastModified);
+        }
+
+        private void LineProposalConfiguration(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LineProposal>().HasOne(f => f.Proposal).WithMany(f => f.LinesProposals).HasForeignKey(f => f.IdProposal).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<LineProposal>().HasOne(f => f.UserLastModified).WithMany().HasForeignKey(f => f.IdUserLastModified);
         }
     }
 }

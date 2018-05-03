@@ -21,3 +21,7 @@ C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Enterpris
 C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Help.Resource.resources
 C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Enterprise.Resource.en.resources
 C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Help.Resource.en.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Photo.Resource.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Proposal.Resource.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Photo.Resource.en.resources
+C:\NeedYourHelp\NYHApp\NYHApp\obj\Debug\netcoreapp2.0\NYHApp.Resources.Proposal.Resource.en.resources

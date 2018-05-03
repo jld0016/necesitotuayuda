@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Close" xml:space="preserve">
-    <value>Cerrada</value>
+  <data name="DateUpload" xml:space="preserve">
+    <value>Fecha Subida</value>
   </data>
-  <data name="CloseDate" xml:space="preserve">
-    <value>Fecha de Cierre</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Fecha</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Descripción</value>
-  </data>
-  <data name="IsExtension" xml:space="preserve">
-    <value>Amplicación</value>
-  </data>
-  <data name="IsMansonry" xml:space="preserve">
-    <value>Albañileria</value>
-  </data>
-  <data name="IsNewWork" xml:space="preserve">
-    <value>Obra Nueva</value>
-  </data>
-  <data name="IsPainting" xml:space="preserve">
-    <value>Pintura</value>
-  </data>
-  <data name="IsReform" xml:space="preserve">
-    <value>Reforma</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Título</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>Usuario</value>
+  <data name="FileName" xml:space="preserve">
+    <value>Nombre</value>
   </data>
 </root>

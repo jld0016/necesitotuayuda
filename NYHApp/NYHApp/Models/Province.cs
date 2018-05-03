@@ -21,5 +21,7 @@ namespace NYHApp.Models
         public virtual ICollection<Enterprise> Enterprises { get; set; }
 
         public virtual ICollection<ApplicationUser> Users { get; set; }
+
+        public virtual ICollection<Help> Helps { get; set; }
     }
 }

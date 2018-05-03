@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NYHApp.Resources.Help {
+namespace NYHApp.Resources.Proposal {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace NYHApp.Resources.Help {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NYHApp.Resources.Help.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NYHApp.Resources.Proposal.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,33 +61,6 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Cerrada.
-        /// </summary>
-        public static string Close {
-            get {
-                return ResourceManager.GetString("Close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Fecha de Cierre.
-        /// </summary>
-        public static string CloseDate {
-            get {
-                return ResourceManager.GetString("CloseDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Fecha.
-        /// </summary>
-        public static string Date {
-            get {
-                return ResourceManager.GetString("Date", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Descripción.
         /// </summary>
         public static string Description {
@@ -97,65 +70,38 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Amplicación.
+        ///   Busca una cadena traducida similar a Empresa.
         /// </summary>
-        public static string IsExtension {
+        public static string Enterprise {
             get {
-                return ResourceManager.GetString("IsExtension", resourceCulture);
+                return ResourceManager.GetString("Enterprise", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Albañileria.
+        ///   Busca una cadena traducida similar a Ayuda.
         /// </summary>
-        public static string IsMansonry {
+        public static string Help {
             get {
-                return ResourceManager.GetString("IsMansonry", resourceCulture);
+                return ResourceManager.GetString("Help", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Obra Nueva.
+        ///   Busca una cadena traducida similar a Precio.
         /// </summary>
-        public static string IsNewWork {
+        public static string Price {
             get {
-                return ResourceManager.GetString("IsNewWork", resourceCulture);
+                return ResourceManager.GetString("Price", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Pintura.
+        ///   Busca una cadena traducida similar a Propuesta.
         /// </summary>
-        public static string IsPainting {
+        public static string Proposal {
             get {
-                return ResourceManager.GetString("IsPainting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Reforma.
-        /// </summary>
-        public static string IsReform {
-            get {
-                return ResourceManager.GetString("IsReform", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Título.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Usuario.
-        /// </summary>
-        public static string User {
-            get {
-                return ResourceManager.GetString("User", resourceCulture);
+                return ResourceManager.GetString("Proposal", resourceCulture);
             }
         }
     }

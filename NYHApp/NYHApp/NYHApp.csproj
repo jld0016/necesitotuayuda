@@ -7,8 +7,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="bootstrap" Version="4.1.0" />
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="bootstrap" Version="4.1.1" />
     <PackageReference Include="jQuery" Version="3.3.1" />
     <PackageReference Include="jQuery.Validation" Version="1.17.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
@@ -44,6 +43,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Photo\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Proposal\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -69,6 +78,21 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Photo\Resource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Photo\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Proposal\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

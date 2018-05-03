@@ -89,5 +89,7 @@ namespace NYHApp.Models
         public ApplicationUser UserLastModified { get; set; }
 
         public virtual ICollection<ApplicationUser> Users { get; set; }
+
+        public virtual ICollection<Proposal> Proposals { get; set; }
     }
 }

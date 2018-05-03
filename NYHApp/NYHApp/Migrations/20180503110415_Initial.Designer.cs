@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.ValueGeneration;
 using NYHApp.Data;
 using System;
 
-namespace NYHApp.Data.Migrations
+namespace NYHApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180426101005_Initial")]
+    [Migration("20180503110415_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -218,6 +218,237 @@ namespace NYHApp.Data.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("NYHApp.Models.Enterprise", b =>
+                {
+                    b.Property<long>("IdEnterprise")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<string>("CIF")
+                        .IsRequired();
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("CodeEnterprise")
+                        .IsRequired();
+
+                    b.Property<DateTime>("DateLastModified");
+
+                    b.Property<string>("Door");
+
+                    b.Property<string>("FiscalName");
+
+                    b.Property<string>("Floor");
+
+                    b.Property<int>("IdCountry");
+
+                    b.Property<int?>("IdProvince");
+
+                    b.Property<int>("IdTypeRoad");
+
+                    b.Property<string>("IdUserAdministrator");
+
+                    b.Property<string>("IdUserLastModified");
+
+                    b.Property<string>("Latitute");
+
+                    b.Property<string>("Longitude");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Number");
+
+                    b.Property<string>("Phone1")
+                        .IsRequired();
+
+                    b.Property<string>("Phone2");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("UnstructuredAddress");
+
+                    b.HasKey("IdEnterprise");
+
+                    b.HasIndex("IdCountry");
+
+                    b.HasIndex("IdProvince");
+
+                    b.HasIndex("IdTypeRoad");
+
+                    b.HasIndex("IdUserAdministrator");
+
+                    b.HasIndex("IdUserLastModified");
+
+                    b.ToTable("Enterprises");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Help", b =>
+                {
+                    b.Property<long>("IdHelp")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<string>("City");
+
+                    b.Property<bool>("Close");
+
+                    b.Property<DateTime?>("CloseDate");
+
+                    b.Property<string>("CodeHelp")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<DateTime>("DateLastModified");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("Door");
+
+                    b.Property<string>("Floor");
+
+                    b.Property<int>("IdCountry");
+
+                    b.Property<int?>("IdProvince");
+
+                    b.Property<int>("IdTypeRoad");
+
+                    b.Property<string>("IdUser")
+                        .IsRequired();
+
+                    b.Property<string>("IdUserLastModified");
+
+                    b.Property<bool>("IsExtension");
+
+                    b.Property<bool>("IsMansonry");
+
+                    b.Property<bool>("IsNewWork");
+
+                    b.Property<bool>("IsPainting");
+
+                    b.Property<bool>("IsReform");
+
+                    b.Property<string>("Latitute");
+
+                    b.Property<string>("Longitude");
+
+                    b.Property<string>("Number");
+
+                    b.Property<string>("Phone1")
+                        .IsRequired();
+
+                    b.Property<string>("Phone2");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.Property<string>("UnstructuredAddress");
+
+                    b.HasKey("IdHelp");
+
+                    b.HasIndex("IdCountry");
+
+                    b.HasIndex("IdProvince");
+
+                    b.HasIndex("IdTypeRoad");
+
+                    b.HasIndex("IdUser");
+
+                    b.HasIndex("IdUserLastModified");
+
+                    b.ToTable("Helps");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.LineProposal", b =>
+                {
+                    b.Property<long>("IdLineProposal")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateLastModified");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("IdProposal");
+
+                    b.Property<string>("IdUserLastModified");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("UserLastModifiedId");
+
+                    b.HasKey("IdLineProposal");
+
+                    b.HasIndex("IdProposal");
+
+                    b.HasIndex("UserLastModifiedId");
+
+                    b.ToTable("LinesProposals");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Photo", b =>
+                {
+                    b.Property<long>("IdPhoto")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateLastModified");
+
+                    b.Property<DateTime>("DateUpload");
+
+                    b.Property<string>("FileName")
+                        .IsRequired();
+
+                    b.Property<long>("IdHelp");
+
+                    b.Property<string>("IdUserLastModified");
+
+                    b.Property<string>("Path")
+                        .IsRequired();
+
+                    b.HasKey("IdPhoto");
+
+                    b.HasIndex("IdHelp");
+
+                    b.HasIndex("IdUserLastModified");
+
+                    b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Proposal", b =>
+                {
+                    b.Property<long>("IdProposal")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateLastModified");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("IdEnterprise");
+
+                    b.Property<long>("IdHelp");
+
+                    b.Property<string>("IdUserLastModified");
+
+                    b.Property<decimal>("Total");
+
+                    b.HasKey("IdProposal");
+
+                    b.HasIndex("IdEnterprise");
+
+                    b.HasIndex("IdHelp");
+
+                    b.HasIndex("IdUserLastModified");
+
+                    b.ToTable("Proposals");
+                });
+
             modelBuilder.Entity("NYHApp.Models.Province", b =>
                 {
                     b.Property<int>("IdProvince")
@@ -261,6 +492,8 @@ namespace NYHApp.Data.Migrations
 
                     b.Property<int>("IdCountry");
 
+                    b.Property<long?>("IdEnterprise");
+
                     b.Property<int>("IdGroup");
 
                     b.Property<int?>("IdProvince");
@@ -290,6 +523,8 @@ namespace NYHApp.Data.Migrations
                     b.Property<string>("UnstructuredAddress");
 
                     b.HasIndex("IdCountry");
+
+                    b.HasIndex("IdEnterprise");
 
                     b.HasIndex("IdGroup");
 
@@ -368,12 +603,108 @@ namespace NYHApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("NYHApp.Models.Enterprise", b =>
+                {
+                    b.HasOne("NYHApp.Models.Country", "Country")
+                        .WithMany("Enterprises")
+                        .HasForeignKey("IdCountry")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.Province", "Province")
+                        .WithMany("Enterprises")
+                        .HasForeignKey("IdProvince");
+
+                    b.HasOne("NYHApp.Models.TypeRoad", "TypeRoad")
+                        .WithMany()
+                        .HasForeignKey("IdTypeRoad")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserAdministrator")
+                        .WithMany()
+                        .HasForeignKey("IdUserAdministrator");
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
+                        .WithMany()
+                        .HasForeignKey("IdUserLastModified");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Help", b =>
+                {
+                    b.HasOne("NYHApp.Models.Country", "Country")
+                        .WithMany("Helps")
+                        .HasForeignKey("IdCountry")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.Province", "Province")
+                        .WithMany("Helps")
+                        .HasForeignKey("IdProvince");
+
+                    b.HasOne("NYHApp.Models.TypeRoad", "TypeRoad")
+                        .WithMany()
+                        .HasForeignKey("IdTypeRoad")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserHelp")
+                        .WithMany("Helps")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
+                        .WithMany()
+                        .HasForeignKey("IdUserLastModified");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.LineProposal", b =>
+                {
+                    b.HasOne("NYHApp.Models.Proposal", "Proposal")
+                        .WithMany("LinesProposals")
+                        .HasForeignKey("IdProposal")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
+                        .WithMany()
+                        .HasForeignKey("UserLastModifiedId");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Photo", b =>
+                {
+                    b.HasOne("NYHApp.Models.Help", "Help")
+                        .WithMany("Photos")
+                        .HasForeignKey("IdHelp")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
+                        .WithMany()
+                        .HasForeignKey("IdUserLastModified");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Proposal", b =>
+                {
+                    b.HasOne("NYHApp.Models.Enterprise", "Enterprise")
+                        .WithMany("Proposals")
+                        .HasForeignKey("IdEnterprise")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NYHApp.Models.Help", "Help")
+                        .WithMany("Proposals")
+                        .HasForeignKey("IdHelp")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
+                        .WithMany()
+                        .HasForeignKey("IdUserLastModified");
+                });
+
             modelBuilder.Entity("NYHApp.Models.ApplicationUser", b =>
                 {
                     b.HasOne("NYHApp.Models.Country", "Country")
                         .WithMany("Users")
                         .HasForeignKey("IdCountry")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.Enterprise", "Enterprise")
+                        .WithMany("Users")
+                        .HasForeignKey("IdEnterprise");
 
                     b.HasOne("NYHApp.Models.ApplicationGroup", "Group")
                         .WithMany("Users")
