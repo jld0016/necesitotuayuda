@@ -79,6 +79,15 @@ namespace NYHApp.Resources.Account {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Confirmar Contraseña.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Pais.
         /// </summary>
         public static string Country {
@@ -111,6 +120,24 @@ namespace NYHApp.Resources.Account {
         public static string Floor {
             get {
                 return ResourceManager.GetString("Floor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Acceder!.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Salir.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -169,6 +196,15 @@ namespace NYHApp.Resources.Account {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Teléfono 1.
         /// </summary>
         public static string Phone1 {
@@ -196,11 +232,20 @@ namespace NYHApp.Resources.Account {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Provincia.
+        ///   Busca una cadena traducida similar a Registrarse.
         /// </summary>
-        public static string Province {
+        public static string Register {
             get {
-                return ResourceManager.GetString("Province", resourceCulture);
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registrarse como Empresa.
+        /// </summary>
+        public static string RegisterEnterprise {
+            get {
+                return ResourceManager.GetString("RegisterEnterprise", resourceCulture);
             }
         }
         
@@ -210,6 +255,15 @@ namespace NYHApp.Resources.Account {
         public static string Road {
             get {
                 return ResourceManager.GetString("Road", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comunidad.
+        /// </summary>
+        public static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
             }
         }
         
@@ -237,6 +291,15 @@ namespace NYHApp.Resources.Account {
         public static string UnstructuredAddress {
             get {
                 return ResourceManager.GetString("UnstructuredAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
     }

@@ -36,6 +36,8 @@ namespace NYHApp
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             services.AddMvc();
         }
 

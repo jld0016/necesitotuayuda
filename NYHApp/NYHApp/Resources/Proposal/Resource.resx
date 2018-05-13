@@ -126,10 +126,16 @@
   <data name="Help" xml:space="preserve">
     <value>Ayuda</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Precio</value>
   </data>
   <data name="Proposal" xml:space="preserve">
     <value>Propuesta</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
   </data>
 </root>

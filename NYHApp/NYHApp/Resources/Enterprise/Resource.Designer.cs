@@ -115,6 +115,15 @@ namespace NYHApp.Resources.Enterprise {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nombre Fiscal.
         /// </summary>
         public static string FiscalName {
@@ -205,20 +214,20 @@ namespace NYHApp.Resources.Enterprise {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Provincia.
-        /// </summary>
-        public static string Province {
-            get {
-                return ResourceManager.GetString("Province", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Tipo Vía.
         /// </summary>
         public static string Road {
             get {
                 return ResourceManager.GetString("Road", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Comunidad.
+        /// </summary>
+        public static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
             }
         }
         

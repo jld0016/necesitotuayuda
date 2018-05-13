@@ -11,23 +11,19 @@ namespace NYHApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Province> Provinces { get; set; }
-
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<Help> Helps { get; set; }
 
         public DbSet<Enterprise> Enterprises { get; set; }
 
+        public DbSet<TypeRoad> TypesRoad { get; set; }
+
         public DbSet<LineProposal> LinesProposals { get; set; }
 
         public DbSet<Proposal> Proposals { get; set; }
 
         public DbSet<Photo> Photos { get; set; }
-
-        public DbSet<ApplicationRoleGroup> RolesGroups { get; set; }
-
-        public DbSet<ApplicationGroup> Groups { get; set; }
 
         public DbSet<ApplicationUser> Users { get; set; }
 
@@ -56,13 +52,6 @@ namespace NYHApp.Data
             modelBuilder.Entity<ApplicationUser>().ToTable("Users").Property(u => u.PasswordHash).HasColumnName("Password");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
 
-            modelBuilder.Entity<ApplicationUser>().HasOne(z => z.Group).WithMany(z => z.Users).HasForeignKey(z => z.IdGroup).OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ApplicationRoleGroup>().HasKey(f => new { f.IdGroup, f.IdRole });
-            modelBuilder.Entity<ApplicationRoleGroup>().HasOne(f => f.Role).WithMany().HasForeignKey(f => f.IdRole).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<ApplicationRoleGroup>().HasOne(f => f.Group).WithMany(z => z.RolesGroups).HasForeignKey(f => f.IdGroup).OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ApplicationUser>().HasOne(f => f.Province).WithMany(z => z.Users).HasForeignKey(z => z.IdProvince);
             modelBuilder.Entity<ApplicationUser>().HasOne(f => f.Country).WithMany(z => z.Users).HasForeignKey(f => f.IdCountry);
             modelBuilder.Entity<ApplicationUser>().HasOne(f => f.TypeRoad).WithMany().HasForeignKey(f => f.IdTypeRoad);
             modelBuilder.Entity<ApplicationUser>().HasOne(f => f.Enterprise).WithMany(z => z.Users).HasForeignKey(f => f.IdEnterprise);
@@ -70,7 +59,6 @@ namespace NYHApp.Data
 
         private void EnterpriseConfiguration(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Enterprise>().HasOne(f => f.Province).WithMany(z => z.Enterprises).HasForeignKey(z => z.IdProvince);
             modelBuilder.Entity<Enterprise>().HasOne(f => f.Country).WithMany(z => z.Enterprises).HasForeignKey(f => f.IdCountry);
             modelBuilder.Entity<Enterprise>().HasOne(f => f.TypeRoad).WithMany().HasForeignKey(f => f.IdTypeRoad);
             modelBuilder.Entity<Enterprise>().HasOne(f => f.UserAdministrator).WithMany().HasForeignKey(f => f.IdUserAdministrator);
@@ -79,7 +67,6 @@ namespace NYHApp.Data
 
         private void HelpConfiguration(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Help>().HasOne(f => f.Province).WithMany(z => z.Helps).HasForeignKey(z => z.IdProvince);
             modelBuilder.Entity<Help>().HasOne(f => f.Country).WithMany(z => z.Helps).HasForeignKey(f => f.IdCountry);
             modelBuilder.Entity<Help>().HasOne(f => f.TypeRoad).WithMany().HasForeignKey(f => f.IdTypeRoad);
             modelBuilder.Entity<Help>().HasOne(f => f.UserHelp).WithMany(f => f.Helps).HasForeignKey(f => f.IdUser).OnDelete(DeleteBehavior.Restrict);

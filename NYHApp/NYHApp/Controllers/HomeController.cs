@@ -20,13 +20,12 @@ namespace NYHApp.Controllers
 
         public IActionResult Index()
         {
-            List<Help> lista = db.Helps.ToList();
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Your application description pa ge.";
 
             return View();
         }

@@ -88,6 +88,15 @@ namespace NYHApp.Resources.Proposal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Precio.
         /// </summary>
         public static string Price {
@@ -102,6 +111,15 @@ namespace NYHApp.Resources.Proposal {
         public static string Proposal {
             get {
                 return ResourceManager.GetString("Proposal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
             }
         }
     }

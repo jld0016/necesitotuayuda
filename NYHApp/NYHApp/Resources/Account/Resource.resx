@@ -162,8 +162,8 @@
   <data name="PostalCode" xml:space="preserve">
     <value>Código Postal</value>
   </data>
-  <data name="Province" xml:space="preserve">
-    <value>Provincia</value>
+  <data name="State" xml:space="preserve">
+    <value>Comunidad</value>
   </data>
   <data name="Road" xml:space="preserve">
     <value>Tipo Vía</value>
@@ -176,5 +176,26 @@
   </data>
   <data name="UnstructuredAddress" xml:space="preserve">
     <value>Dirección No Estructurada</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Acceder!</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+  <data name="RegisterEnterprise" xml:space="preserve">
+    <value>Registrarse como Empresa</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Salir</value>
   </data>
 </root>

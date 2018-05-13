@@ -75,10 +75,8 @@ namespace NYHApp.Models
         [Display(Name = "City", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string City { get; set; }
 
-        [Display(Name = "Province", ResourceType = typeof(Resources.Enterprise.Resource))]
-        public int? IdProvince { get; set; }
-
-        public virtual Province Province { get; set; }
+        [Display(Name = "State", ResourceType = typeof(Resources.Enterprise.Resource))]
+        public string State { get; set; }
 
         [Display(Name = "Country", ResourceType = typeof(Resources.Enterprise.Resource))]
         public int IdCountry { get; set; }

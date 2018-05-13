@@ -178,32 +178,6 @@ namespace NYHApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("NYHApp.Models.ApplicationGroup", b =>
-                {
-                    b.Property<int>("IdGroup")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("IdGroup");
-
-                    b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("NYHApp.Models.ApplicationRoleGroup", b =>
-                {
-                    b.Property<int>("IdGroup");
-
-                    b.Property<string>("IdRole");
-
-                    b.HasKey("IdGroup", "IdRole");
-
-                    b.HasIndex("IdRole");
-
-                    b.ToTable("RolesGroups");
-                });
-
             modelBuilder.Entity("NYHApp.Models.Country", b =>
                 {
                     b.Property<int>("IdCountry")
@@ -243,8 +217,6 @@ namespace NYHApp.Migrations
 
                     b.Property<int>("IdCountry");
 
-                    b.Property<int?>("IdProvince");
-
                     b.Property<int>("IdTypeRoad");
 
                     b.Property<string>("IdUserAdministrator");
@@ -267,13 +239,13 @@ namespace NYHApp.Migrations
 
                     b.Property<string>("PostalCode");
 
+                    b.Property<string>("State");
+
                     b.Property<string>("UnstructuredAddress");
 
                     b.HasKey("IdEnterprise");
 
                     b.HasIndex("IdCountry");
-
-                    b.HasIndex("IdProvince");
 
                     b.HasIndex("IdTypeRoad");
 
@@ -314,8 +286,6 @@ namespace NYHApp.Migrations
 
                     b.Property<int>("IdCountry");
 
-                    b.Property<int?>("IdProvince");
-
                     b.Property<int>("IdTypeRoad");
 
                     b.Property<string>("IdUser")
@@ -346,6 +316,8 @@ namespace NYHApp.Migrations
 
                     b.Property<string>("PostalCode");
 
+                    b.Property<string>("State");
+
                     b.Property<string>("Title")
                         .IsRequired();
 
@@ -354,8 +326,6 @@ namespace NYHApp.Migrations
                     b.HasKey("IdHelp");
 
                     b.HasIndex("IdCountry");
-
-                    b.HasIndex("IdProvince");
 
                     b.HasIndex("IdTypeRoad");
 
@@ -448,19 +418,6 @@ namespace NYHApp.Migrations
                     b.ToTable("Proposals");
                 });
 
-            modelBuilder.Entity("NYHApp.Models.Province", b =>
-                {
-                    b.Property<int>("IdProvince")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("IdProvince");
-
-                    b.ToTable("Provinces");
-                });
-
             modelBuilder.Entity("NYHApp.Models.TypeRoad", b =>
                 {
                     b.Property<int>("IdTypeRoad")
@@ -493,10 +450,6 @@ namespace NYHApp.Migrations
 
                     b.Property<long?>("IdEnterprise");
 
-                    b.Property<int>("IdGroup");
-
-                    b.Property<int?>("IdProvince");
-
                     b.Property<int>("IdTypeRoad");
 
                     b.Property<string>("NIF")
@@ -514,6 +467,8 @@ namespace NYHApp.Migrations
 
                     b.Property<string>("PostalCode");
 
+                    b.Property<string>("State");
+
                     b.Property<string>("Surname1")
                         .IsRequired();
 
@@ -524,10 +479,6 @@ namespace NYHApp.Migrations
                     b.HasIndex("IdCountry");
 
                     b.HasIndex("IdEnterprise");
-
-                    b.HasIndex("IdGroup");
-
-                    b.HasIndex("IdProvince");
 
                     b.HasIndex("IdTypeRoad");
 
@@ -589,29 +540,12 @@ namespace NYHApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("NYHApp.Models.ApplicationRoleGroup", b =>
-                {
-                    b.HasOne("NYHApp.Models.ApplicationGroup", "Group")
-                        .WithMany("RolesGroups")
-                        .HasForeignKey("IdGroup")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("IdRole")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("NYHApp.Models.Enterprise", b =>
                 {
                     b.HasOne("NYHApp.Models.Country", "Country")
                         .WithMany("Enterprises")
                         .HasForeignKey("IdCountry")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NYHApp.Models.Province", "Province")
-                        .WithMany("Enterprises")
-                        .HasForeignKey("IdProvince");
 
                     b.HasOne("NYHApp.Models.TypeRoad", "TypeRoad")
                         .WithMany()
@@ -633,10 +567,6 @@ namespace NYHApp.Migrations
                         .WithMany("Helps")
                         .HasForeignKey("IdCountry")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NYHApp.Models.Province", "Province")
-                        .WithMany("Helps")
-                        .HasForeignKey("IdProvince");
 
                     b.HasOne("NYHApp.Models.TypeRoad", "TypeRoad")
                         .WithMany()
@@ -705,15 +635,6 @@ namespace NYHApp.Migrations
                         .WithMany("Users")
                         .HasForeignKey("IdEnterprise");
 
-                    b.HasOne("NYHApp.Models.ApplicationGroup", "Group")
-                        .WithMany("Users")
-                        .HasForeignKey("IdGroup")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NYHApp.Models.Province", "Province")
-                        .WithMany("Users")
-                        .HasForeignKey("IdProvince");
-
                     b.HasOne("NYHApp.Models.TypeRoad", "TypeRoad")
                         .WithMany()
                         .HasForeignKey("IdTypeRoad")
@@ -722,5 +643,4 @@ namespace NYHApp.Migrations
 #pragma warning restore 612, 618
         }
     }
-
-} 
+}

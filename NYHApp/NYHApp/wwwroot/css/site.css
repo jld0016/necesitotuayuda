@@ -33,3 +33,9 @@
         display: none;
     }
 }
+
+.required:after {
+    content: "*";
+    font-weight: bold;
+    color: #FF6666;
+}

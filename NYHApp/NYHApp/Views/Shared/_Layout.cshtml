@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,44 +11,66 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+            <div class="container">
+                <a href="../" class="navbar-brand">N Y H</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">NYHApp</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes"> <span class="caret"></span>Elementos</a>
+                            <div class="dropdown-menu" aria-labelledby="themes">
+                                <a class="dropdown-item" href="../default/">Oferta</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/Help/Create">Ayuda</a>
+                                <a class="dropdown-item" href="../cosmo/">Cosmo</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            @if (User.IsInRole("User"))
+                            {
+                                <a class="nav-link" href="/Enterprise/Edit">@NYHApp.Resources.Account.Resource.Enterprise</a>
+                            }
+                            else
+                            {
+
+                                <a class="nav-link" href="/Account/Edit">@NYHApp.Resources.Shared.Resource.Profile</a>
+                            }
+                        </li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container body-content">
+    }
+    <div class="container">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - NYHApp</p>
+
+        <div id="modal"></div>
+
+        <footer id="footer">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <p class="text-center font-weight-bold"> N Y H </p>
+                </div>
+            </div>
         </footer>
     </div>
-
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

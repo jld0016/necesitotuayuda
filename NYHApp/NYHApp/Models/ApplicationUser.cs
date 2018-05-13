@@ -53,10 +53,8 @@ namespace NYHApp.Models
         [Display(Name = "City", ResourceType = typeof(Resources.Account.Resource))]
         public string City { get; set; }
 
-        [Display(Name = "Province", ResourceType = typeof(Resources.Account.Resource))]
-        public int? IdProvince { get; set; }
-
-        public virtual Province Province { get; set; }
+        [Display(Name = "State", ResourceType = typeof(Resources.Account.Resource))]
+        public string State { get; set; }
 
         [Display(Name = "Country", ResourceType = typeof(Resources.Account.Resource))]
         public int IdCountry { get; set; }
@@ -69,11 +67,6 @@ namespace NYHApp.Models
 
         [Display(Name = "Phone2", ResourceType = typeof(Resources.Account.Resource))]
         public string Phone2 { get; set; }
-
-        [Display(Name = "NameGroup", ResourceType = typeof(Resources.Account.Resource))]
-        public int IdGroup { get; set; }
-
-        public virtual ApplicationGroup Group { get; set; }
 
         [Display(Name = "Enterprise", ResourceType = typeof(Resources.Account.Resource))]
         public long? IdEnterprise { get; set; }

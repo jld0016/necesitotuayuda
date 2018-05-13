@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "";
+}
+
+<div class="modal fade" id="modalActive" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@RenderSection("Scripts", required: false)
