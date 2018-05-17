@@ -123,4 +123,7 @@
   <data name="FileName" xml:space="preserve">
     <value>Nombre</value>
   </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Fotografia</value>
+  </data>
 </root>

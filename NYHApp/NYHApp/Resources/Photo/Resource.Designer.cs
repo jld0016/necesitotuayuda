@@ -77,5 +77,14 @@ namespace NYHApp.Resources.Photo {
                 return ResourceManager.GetString("FileName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fotografia.
+        /// </summary>
+        public static string Photo {
+            get {
+                return ResourceManager.GetString("Photo", resourceCulture);
+            }
+        }
     }
 }

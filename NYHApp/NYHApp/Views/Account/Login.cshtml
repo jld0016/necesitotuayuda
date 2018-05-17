@@ -9,9 +9,9 @@
     Layout = "~/Views/Shared/TemplateModal.cshtml";
     ViewData["Title"] = "Log in";
 }
-<div class="modal-header">
+<div class="modal-header bg-dark text-light">
     <label class="modal-title col-xs-8 col-md-8 col-lg-8">@NYHApp.Resources.Account.Resource.Login</label>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -35,12 +35,12 @@
             </div>
         </div>
         <div class="form-group">
-            <a class="btn btn-primary" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
-            <button type="submit" class="btn btn-default">@NYHApp.Resources.Account.Resource.Login</button>
+            <a class="btn btn-success" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">@NYHApp.Resources.Account.Resource.Register</a>
+            <button type="submit" class="btn btn-primary">@NYHApp.Resources.Account.Resource.Login</button>
         </div>
         <div class="form-group">
             <p>
-                <a asp-action="ForgotPassword">Forgot your password?</a>
+                <a asp-action="ForgotPassword">@NYHApp.Resources.Account.Resource.ForgotPassword</a>
             </p>
         </div>
     </form>

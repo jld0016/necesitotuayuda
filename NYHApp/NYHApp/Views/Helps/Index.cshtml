@@ -1,0 +1,123 @@
+﻿@model IEnumerable<NYHApp.Models.Help>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row mt-2">
+    <div class="col-xs-12 col-md-12 col-lg-4">
+        <div class="card bg-success mt-1">
+            <div class="card-body">
+                <div class="col-xs-6 col-md-6 col-lg-6">
+                    <img />
+                </div>
+                <div class="col-xs-6 col-md-6 col-lg-6 font-weight-bold">
+                    @User.Identity.Name
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-12 col-lg-8">
+        @foreach (var item in Model)
+        {
+            <div class="card bg-dark text-light mt-1">
+                <div class="card-header">
+                    <span class="text-left card-title">@Html.DisplayFor(modelItem => item.Title)</span>
+                </div>
+                <div class="card-body bg-light text-dark pb-0">
+                    <div class="col col-xs-12 col-md-6 col-lg-6">
+                        <span class="text-left">@Html.DisplayFor(modelItem => item.Description)</span>
+                    </div>
+                    <div class="col col-xs-12 col-md-6 col-lg-6">
+                        @if (item.Photos != null)
+                        {
+                            @foreach (var photo in item.Photos)
+                            {
+                                <img class="img-fluid rounded" src="@photo.Path" />
+                            }
+                        }
+                    </div>
+                    <div class="row col-xs-12 col-md-12 col-lg-12 mt-3 mb-0 pb-0 border-top">
+                        <div class="col-xs-12 col-md-2 col-lg-2">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => item.IsMansonry) @Html.DisplayNameFor(model => item.IsMansonry)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2 col-lg-2">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => item.IsPainting) @Html.DisplayNameFor(model => item.IsPainting)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2 col-lg-2">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => item.IsNewWork) @Html.DisplayNameFor(model => item.IsNewWork)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2 col-lg-2">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => item.IsExtension) @Html.DisplayNameFor(model => item.IsExtension)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2 col-lg-2">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => item.IsReform) @Html.DisplayNameFor(model => item.IsReform)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <a class="btn btn-default text-light" asp-action="Create" asp-controller="Proposals"><i class="fas fa-reply"></i></a>
+                        <a class="btn btn-default btnDetails" IdHelp="@item.IdHelp"><i class="fas fa-eye"></i></a>
+                        @if (User.IsInRole("User"))
+                        {
+                            <a class="btn btn-default text-light" asp-route-id="@item.IdHelp" asp-action="Edit" asp-controller="Helps"><i class="fas fa-pencil-alt"></i></a>
+                        }
+                        <a class="btn btn-default hddn"><i class="fas fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('body').on('click', '.btnDetails', function (e) {
+            e.preventDefault();
+            succes = function (data) {
+                $(".modal-backdrop").remove();
+                $("#modal").empty();
+                $("#modal").append(data);
+                $('#modalActive').modal('handleUpdate');
+                $("#modalActive").modal("show");
+            }
+            error = function (err) {
+                console.log("The request is invalid")
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Helps/Details",
+                data: { id: $(this).attr('IdHelp') },
+                success: succes,
+                error: error
+            });
+        })
+
+        $('body').on('click', '.hddn', function (e) { 
+            var h = (this).closest('.card-footer')
+            $(this).closest('.card-footer').closest('.card').addClass('d-none')
+        })
+    </script>
+}
+

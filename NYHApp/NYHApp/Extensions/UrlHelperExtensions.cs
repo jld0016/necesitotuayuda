@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NYHApp.Controllers;
+using NYHApp.Data;
+using NYHApp.Models;
 
 namespace Microsoft.AspNetCore.Mvc
 {
@@ -24,6 +26,15 @@ namespace Microsoft.AspNetCore.Mvc
                 controller: "Account",
                 values: new { userId, code },
                 protocol: scheme);
+        }
+
+        public static ApplicationUser GetUserLogin(string UserName, ApplicationDbContext _context)
+        {
+            if(UserName != null)
+            {
+                return _context.Users.Where(z => z.UserName == UserName).FirstOrDefault();
+            }
+            return new ApplicationUser();
         }
     }
 }

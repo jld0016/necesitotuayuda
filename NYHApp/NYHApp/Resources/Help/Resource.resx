@@ -123,6 +123,12 @@
   <data name="CloseDate" xml:space="preserve">
     <value>Fecha de Cierre</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="CreateHelp" xml:space="preserve">
+    <value>Ayudame</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Fecha</value>
   </data>

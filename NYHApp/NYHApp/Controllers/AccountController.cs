@@ -279,7 +279,7 @@ namespace NYHApp.Controllers
                         Door = model.EnterpriseDoor,
                         FiscalName = model.EnterpriseFiscalName,
                         Floor = model.EnterpriseDoor,
-                        IdTypeRoad = model.EnterpriseIdTypeRoad,
+                        IdTypeRoad = model.EnterpriseIdTypeRoad ?? 0,
                         Name = model.EnterpriseName,
                         Number = model.EnterpriseNumber,
                         Latitute = "",

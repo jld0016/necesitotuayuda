@@ -198,4 +198,10 @@
   <data name="Logout" xml:space="preserve">
     <value>Salir</value>
   </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>¿Has olvidado la contraseña?</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Recordar contraseña</value>
+  </data>
 </root>

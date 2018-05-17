@@ -124,6 +124,15 @@ namespace NYHApp.Resources.Account {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Has olvidado la contraseña?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Acceder!.
         /// </summary>
         public static string Login {
@@ -246,6 +255,15 @@ namespace NYHApp.Resources.Account {
         public static string RegisterEnterprise {
             get {
                 return ResourceManager.GetString("RegisterEnterprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recordar contraseña.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         

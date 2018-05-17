@@ -1,0 +1,187 @@
+﻿@model NYHApp.ViewModels.HelpVM
+
+@{
+    ViewData["Title"] = NYHApp.Resources.Help.Resource.CreateHelp;
+}
+
+@using (Html.BeginForm("Create", "Helps", FormMethod.Post, new { @class = "form-group", id = "HelpMainForm", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.Help.Date)
+    @Html.HiddenFor(model => model.Help.CodeHelp)
+    @Html.HiddenFor(model => model.Help.IdUser)
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+            @Html.LabelFor(model => model.Help.Title, new { @class = "control-label required" })
+            @Html.EditorFor(model => model.Help.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+            @Html.LabelFor(model => model.Help.Description, new { @class = "control-label required" })
+            @Html.TextAreaFor(model => model.Help.Description, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Help.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Help.IsMansonry" /> @Html.DisplayNameFor(model => model.Help.IsMansonry)
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Help.IsPainting" /> @Html.DisplayNameFor(model => model.Help.IsPainting)
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Help.IsNewWork" /> @Html.DisplayNameFor(model => model.Help.IsNewWork)
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Help.IsExtension" /> @Html.DisplayNameFor(model => model.Help.IsExtension)
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Help.IsReform" /> @Html.DisplayNameFor(model => model.Help.IsReform)
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <span class="btn btn-warning btn-file">
+                <i class="fa fa-plus"></i> @NYHApp.Resources.Photo.Resource.Photo
+                <input type="file" id="Photos" name="Photos" accept="image/jpg,image/png,image/jpeg,image/gif,application/pdf" multiple />
+            </span>
+            <a class="btn btn-success" id="buttonVerImg" href="" target="_blank"><i class="fa fa-eye"> Ver</i></a>
+        </div>
+        <div id="listImages" class="col-md-6">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            @Html.LabelFor(model => model.Help.IdTypeRoad, new { @class = "control-label required" })
+            @Html.DropDownListFor(model => model.Help.IdTypeRoad, ViewBag.TypeRoad as SelectList, NYHApp.Resources.Shared.Resource.Select, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Help.IdTypeRoad, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-4 col-lg-4">
+            @Html.LabelFor(model => model.Help.Address, new { @class = "control-label required" })
+            @Html.EditorFor(model => model.Help.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Address, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-1 col-lg-1">
+            @Html.LabelFor(model => model.Help.Number, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Help.Number, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Number, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-1 col-lg-1">
+            @Html.LabelFor(model => model.Help.Door, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Help.Door, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Door, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-1 col-lg-1">
+            @Html.LabelFor(model => model.Help.Floor, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Help.Floor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Floor, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-4 col-lg-4">
+            @Html.LabelFor(model => model.Help.UnstructuredAddress, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Help.UnstructuredAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.UnstructuredAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            @Html.LabelFor(model => model.Help.PostalCode, new { @class = "control-label required" })
+            @Html.EditorFor(model => model.Help.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.PostalCode, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-4 col-lg-4">
+            @Html.LabelFor(model => model.Help.City, new { @class = "control-label required" })
+            @Html.EditorFor(model => model.Help.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.City, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-4 col-lg-4">
+            @Html.LabelFor(model => model.Help.State, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Help.State, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.State, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-4 col-lg-4">
+            @Html.LabelFor(model => model.Help.IdCountry, new { @class = "control-label required" })
+            @Html.DropDownListFor(model => model.Help.IdCountry, ViewBag.Countries as SelectList, NYHApp.Resources.Shared.Resource.Select, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Help.IdCountry, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            @Html.LabelFor(model => model.Help.Phone1, new { @class = "control-label required" })
+            @Html.EditorFor(model => model.Help.Phone1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Phone1, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-xs-12 col-md-2 col-lg-2">
+            @Html.LabelFor(model => model.Help.Phone2, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Help.Phone2, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Help.Phone2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row col-xs-12 col-md-12 col-lg-12 mb-2 float-right">
+        <div class="col-xs-12 col-md-2 col-lg-2">
+            <a class="btn btn-default col-xs-12 col-md-12 col-lg-12 border-dark float-right" href="../"><i class="fas fa-ban"></i> @NYHApp.Resources.Shared.Resource.Cancel</a>
+        </div>
+        <div class="col-xs-12 col-md-2 col-lg-2 float-right">
+            <button type="submit" class="btn btn-primary col-xs-12 col-md-12 col-lg-12 float-right"><i class="far fa-save"></i> @NYHApp.Resources.Shared.Resource.Create</button>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script>
+        document.getElementById('Photos').addEventListener('change', handleFileSelect, false);
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+            $("#listImages").empty();
+            // Loop through the FileList and render image files as thumbnails.
+            for (var i = 0, f; f = files[i]; i++) {
+
+                // Only process image files.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        if (!existeImagen(theFile.name)) {
+                            var span = document.createElement('span');
+                            span.innerHTML = ['<img onclick="$(\'.activeImage\').removeClass(\'activeImage\');',
+                                '$(this).addClass(\'activeImage\'); actualizaBtn();" class="thumb" src="', e.target.result,
+                                '" title="', escape(theFile.name), '"/>',
+                                '<input class="hidden" id="prueba" type="file" accept="image/jpg,image/png,image/jpeg,image/gif"/>'].join('');
+                            document.getElementById('listImages').insertBefore(span, null);
+                        }
+                    };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }
+        }
+    </script>
+}
+

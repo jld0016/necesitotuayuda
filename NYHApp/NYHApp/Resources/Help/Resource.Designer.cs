@@ -79,6 +79,24 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contacto.
+        /// </summary>
+        public static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ayudame.
+        /// </summary>
+        public static string CreateHelp {
+            get {
+                return ResourceManager.GetString("CreateHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha.
         /// </summary>
         public static string Date {

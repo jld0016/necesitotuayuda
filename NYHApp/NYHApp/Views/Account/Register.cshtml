@@ -1,5 +1,6 @@
 ﻿@model RegisterViewModel
 @{
+    Layout = "/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Register";
 }
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-group", id = "MainForm" }))

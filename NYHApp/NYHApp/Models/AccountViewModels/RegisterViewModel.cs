@@ -87,21 +87,19 @@ namespace NYHApp.Models.AccountViewModels
 
         public bool IsEnterprise { get; set; }
 
-        [Required]
         [Display(Name = "Name", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterpriseName { get; set; }
 
         [Display(Name = "FiscalName", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterpriseFiscalName { get; set; }
 
-        [Required]
+
         [Display(Name = "CIF", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterpriseCIF { get; set; }
 
         [Display(Name = "Road", ResourceType = typeof(Resources.Enterprise.Resource))]
-        public int EnterpriseIdTypeRoad { get; set; }
+        public int? EnterpriseIdTypeRoad { get; set; }
 
-        [Required]
         [Display(Name = "Address", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterpriseAddress { get; set; }
 
@@ -129,14 +127,12 @@ namespace NYHApp.Models.AccountViewModels
         [Display(Name = "Country", ResourceType = typeof(Resources.Enterprise.Resource))]
         public int EnterpriseIdCountry { get; set; }
 
-        [Required]
         [Display(Name = "Phone1", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterprisePhone1 { get; set; }
 
         [Display(Name = "Phone2", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterprisePhone2 { get; set; }
 
-        [Required]
         [EmailAddress]
         [Display(Name = "Email", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string EnterpriseEmail { get; set; }
