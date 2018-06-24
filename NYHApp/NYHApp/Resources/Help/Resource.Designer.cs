@@ -106,6 +106,15 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Dedicación.
+        /// </summary>
+        public static string Dedication {
+            get {
+                return ResourceManager.GetString("Dedication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Descripción.
         /// </summary>
         public static string Description {
@@ -115,11 +124,20 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Amplicación.
+        ///   Busca una cadena traducida similar a Alta.
         /// </summary>
-        public static string IsExtension {
+        public static string High {
             get {
-                return ResourceManager.GetString("IsExtension", resourceCulture);
+                return ResourceManager.GetString("High", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Electricidad.
+        /// </summary>
+        public static string IsElectricity {
+            get {
+                return ResourceManager.GetString("IsElectricity", resourceCulture);
             }
         }
         
@@ -133,15 +151,6 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Obra Nueva.
-        /// </summary>
-        public static string IsNewWork {
-            get {
-                return ResourceManager.GetString("IsNewWork", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Pintura.
         /// </summary>
         public static string IsPainting {
@@ -151,11 +160,47 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Reforma.
+        ///   Busca una cadena traducida similar a Fontaneria.
         /// </summary>
-        public static string IsReform {
+        public static string IsPlumbing {
             get {
-                return ResourceManager.GetString("IsReform", resourceCulture);
+                return ResourceManager.GetString("IsPlumbing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Baja.
+        /// </summary>
+        public static string Low {
+            get {
+                return ResourceManager.GetString("Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Media.
+        /// </summary>
+        public static string Medium {
+            get {
+                return ResourceManager.GetString("Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nada.
+        /// </summary>
+        public static string Nothing {
+            get {
+                return ResourceManager.GetString("Nothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Está buscando ayuda.
+        /// </summary>
+        public static string SearchHelp {
+            get {
+                return ResourceManager.GetString("SearchHelp", resourceCulture);
             }
         }
         
@@ -174,6 +219,15 @@ namespace NYHApp.Resources.Help {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Quiere ayudar.
+        /// </summary>
+        public static string WantHelp {
+            get {
+                return ResourceManager.GetString("WantHelp", resourceCulture);
             }
         }
     }

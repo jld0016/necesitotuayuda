@@ -8,9 +8,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NYHApp.Data;
 using NYHApp.Models;
+using NYHApp.Models.AccountViewModels;
 using NYHApp.Models.ManageViewModels;
 using NYHApp.Services;
 
@@ -25,6 +29,7 @@ namespace NYHApp.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private ApplicationDbContext db;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -34,13 +39,15 @@ namespace NYHApp.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            db = context;
         }
 
         [TempData]
@@ -55,24 +62,74 @@ namespace NYHApp.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var model = new IndexViewModel
+            if (user.IdEnterprise != null)
             {
-                Username = user.UserName,
+                user.Enterprise = db.Enterprises.Include(z=>z.EnterprisesTypesJob).ThenInclude(z=>z.TypeJob).Where(z=>z.IdEnterprise == user.IdEnterprise).FirstOrDefault();
+            }
+
+            var model = new ModifyAccountViewModel()
+            {
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                Name = user.Name,
+                Surname1 = user.Surname1,
+                Surname2 = user.Surname2,
+                Address = user.Address,
+                City = user.City,
+                Country = user.Country,
+                Door = user.Door,
+                Floor = user.Floor,
+                IdCountry = user.IdCountry,
+                IdTypeRoad = user.IdTypeRoad,
+                UnstructuredAddress = user.UnstructuredAddress,
+                NIF = user.NIF,
+                Number = user.Number,
+                Phone1 = user.Phone1,
+                Phone2 = user.Phone2,
+                PostalCode = user.PostalCode,
+                State = user.State
             };
+            if (user.Enterprise != null)
+            {
+                model.IsEnterprise = true;
+                model.EnterpriseAddress = user.Enterprise.Address;
+                model.EnterpriseCIF = user.Enterprise.CIF;
+                model.EnterpriseCity = user.Enterprise.City;
+                model.EnterpriseDoor = user.Enterprise.Door;
+                model.EnterpriseEmail = user.Enterprise.Email;
+                model.EnterpriseFiscalName = user.Enterprise.FiscalName;
+                model.EnterpriseFloor = user.Enterprise.Floor;
+                model.EnterpriseIdCountry = user.Enterprise.IdCountry;
+                model.EnterpriseIdTypeRoad = user.Enterprise.IdTypeRoad;
+                model.EnterpriseName = user.Enterprise.Name;
+                model.EnterpriseNumber = user.Enterprise.Number;
+                model.EnterprisePhone1 = user.Enterprise.Phone1;
+                model.EnterprisePhone2 = user.Enterprise.Phone2;
+                model.EnterprisePostalCode = user.Enterprise.PostalCode;
+                model.EnterpriseState = user.Enterprise.State;
+                model.EnterpriseUnstructuredAddress = user.Enterprise.UnstructuredAddress;
+                model.EnterpriseIsMansonry = user.Enterprise.IsMansonry;
+                model.EnterpriseIsElectricity = user.Enterprise.IsElectricity;
+                model.EnterpriseIsPainting = user.Enterprise.IsPainting;
+                model.EnterpriseIsPlumbing = user.Enterprise.IsPlumbing;
+                model.EnterprisesTypesJobPainting = user.Enterprise.EnterprisesTypesJob.Where(z => z.TypeJob.IdJob == 1).ToList();
+                model.EnterprisesTypesJobElectricity = user.Enterprise.EnterprisesTypesJob.Where(z => z.TypeJob.IdJob == 4).ToList();
+                model.EnterprisesTypesJobMansonry = user.Enterprise.EnterprisesTypesJob.Where(z => z.TypeJob.IdJob == 2).ToList();
+                model.EnterprisesTypesJobPlumbing = user.Enterprise.EnterprisesTypesJob.Where(z => z.TypeJob.IdJob == 3).ToList();
+            }
+            ViewBag.TypeRoad = new SelectList(db.TypesRoad, "IdTypeRoad", "Name");
+            ViewBag.Countries = new SelectList(db.Countries, "IdCountry", "Name");
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(IndexViewModel model)
+        public async Task<IActionResult> Index(ModifyAccountViewModel model)
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.TypeRoad = new SelectList(db.TypesRoad, "IdTypeRoad", "Name");
+                ViewBag.Countries = new SelectList(db.Countries, "IdCountry", "Name");
                 return View(model);
             }
 
@@ -82,28 +139,67 @@ namespace NYHApp.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var email = user.Email;
-            if (model.Email != email)
+            if (user.IdEnterprise != null)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
-                if (!setEmailResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
-                }
+                user.Enterprise = db.Enterprises.Find(user.IdEnterprise);
             }
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                }
-            }
+            user.Email = model.Email;
+            user.Name = model.Name;
+            user.Surname1 = model.Surname1;
+            user.Surname2 = model.Surname2;
+            user.Address = model.Address;
+            user.City = model.City;
+            user.Country = model.Country;
+            user.Door = model.Door;
+            user.Floor = model.Floor;
+            user.IdCountry = model.IdCountry;
+            user.IdTypeRoad = model.IdTypeRoad;
+            user.UnstructuredAddress = model.UnstructuredAddress;
+            user.NIF = model.NIF;
+            user.Number = model.Number;
+            user.Phone1 = model.Phone1;
+            user.Phone2 = model.Phone2;
+            user.PostalCode = model.PostalCode;
+            user.State = model.State;
 
-            StatusMessage = "Your profile has been updated";
-            return RedirectToAction(nameof(Index));
+            user.Enterprise.Address = model.EnterpriseAddress; 
+            user.Enterprise.CIF = model.EnterpriseCIF;
+            user.Enterprise.City = model.EnterpriseCity;
+            user.Enterprise.Door = model.EnterpriseDoor;
+            user.Enterprise.Email = model.EnterpriseEmail;
+            user.Enterprise.FiscalName = model.EnterpriseFiscalName;
+            user.Enterprise.Floor = model.EnterpriseFloor;
+            user.Enterprise.IdCountry = model.EnterpriseIdCountry;
+            user.Enterprise.IdTypeRoad = model.EnterpriseIdTypeRoad ?? 1;
+            user.Enterprise.Name = model.EnterpriseName;
+            user.Enterprise.Number = model.EnterpriseNumber;
+            user.Enterprise.Phone1 = model.EnterprisePhone1;
+            user.Enterprise.Phone2 = model.EnterprisePhone2;
+            user.Enterprise.PostalCode = model.EnterprisePostalCode;
+            user.Enterprise.State = model.EnterpriseState;
+            user.Enterprise.UnstructuredAddress = model.EnterpriseUnstructuredAddress;
+
+            user.Enterprise.IsElectricity = model.EnterpriseIsElectricity;
+            user.Enterprise.IsMansonry = model.EnterpriseIsMansonry;
+            user.Enterprise.IsPainting = model.EnterpriseIsPainting;
+            user.Enterprise.IsPlumbing = model.EnterpriseIsPlumbing;
+            UpdateCollection(model.EnterprisesTypesJobPainting);
+            UpdateCollection(model.EnterprisesTypesJobElectricity);
+            UpdateCollection(model.EnterprisesTypesJobPlumbing);
+            UpdateCollection(model.EnterprisesTypesJobMansonry);
+
+            db.Update(user);
+            await db.SaveChangesAsync();
+            return Redirect("/Helps/Index");
+        }
+
+        private void UpdateCollection(IEnumerable<EnterpriseTypeJob> collection)
+        {
+            foreach (var item in collection)
+            {
+                db.Update(item);
+            }
         }
 
         [HttpPost]

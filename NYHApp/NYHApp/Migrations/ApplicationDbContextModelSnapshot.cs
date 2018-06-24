@@ -18,7 +18,7 @@ namespace NYHApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -211,6 +211,9 @@ namespace NYHApp.Migrations
 
                     b.Property<string>("Door");
 
+                    b.Property<string>("Email")
+                        .IsRequired();
+
                     b.Property<string>("FiscalName");
 
                     b.Property<string>("Floor");
@@ -222,6 +225,14 @@ namespace NYHApp.Migrations
                     b.Property<string>("IdUserAdministrator");
 
                     b.Property<string>("IdUserLastModified");
+
+                    b.Property<bool>("IsElectricity");
+
+                    b.Property<bool>("IsMansonry");
+
+                    b.Property<bool>("IsPainting");
+
+                    b.Property<bool>("IsPlumbing");
 
                     b.Property<string>("Latitute");
 
@@ -256,6 +267,34 @@ namespace NYHApp.Migrations
                     b.ToTable("Enterprises");
                 });
 
+            modelBuilder.Entity("NYHApp.Models.EnterpriseJob", b =>
+                {
+                    b.Property<long>("IdEnterprise");
+
+                    b.Property<int>("IdJob");
+
+                    b.HasKey("IdEnterprise", "IdJob");
+
+                    b.HasIndex("IdJob");
+
+                    b.ToTable("EnterprisesJobs");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.EnterpriseTypeJob", b =>
+                {
+                    b.Property<long>("IdTypeJob");
+
+                    b.Property<long>("IdEnterprise");
+
+                    b.Property<int>("Rating");
+
+                    b.HasKey("IdTypeJob", "IdEnterprise");
+
+                    b.HasIndex("IdEnterprise");
+
+                    b.ToTable("EnterprisesTypesJob");
+                });
+
             modelBuilder.Entity("NYHApp.Models.Help", b =>
                 {
                     b.Property<long>("IdHelp")
@@ -264,7 +303,8 @@ namespace NYHApp.Migrations
                     b.Property<string>("Address")
                         .IsRequired();
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<bool>("Close");
 
@@ -293,15 +333,13 @@ namespace NYHApp.Migrations
 
                     b.Property<string>("IdUserLastModified");
 
-                    b.Property<bool>("IsExtension");
+                    b.Property<bool>("IsElectricity");
 
                     b.Property<bool>("IsMansonry");
 
-                    b.Property<bool>("IsNewWork");
-
                     b.Property<bool>("IsPainting");
 
-                    b.Property<bool>("IsReform");
+                    b.Property<bool>("IsPlumbing");
 
                     b.Property<string>("Latitute");
 
@@ -314,7 +352,8 @@ namespace NYHApp.Migrations
 
                     b.Property<string>("Phone2");
 
-                    b.Property<string>("PostalCode");
+                    b.Property<string>("PostalCode")
+                        .IsRequired();
 
                     b.Property<string>("State");
 
@@ -334,6 +373,46 @@ namespace NYHApp.Migrations
                     b.HasIndex("IdUserLastModified");
 
                     b.ToTable("Helps");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.HelpJob", b =>
+                {
+                    b.Property<long>("IdHelp");
+
+                    b.Property<int>("IdJob");
+
+                    b.HasKey("IdHelp", "IdJob");
+
+                    b.HasIndex("IdJob");
+
+                    b.ToTable("HelpsJobs");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.HelpTypeJob", b =>
+                {
+                    b.Property<long>("IdHelp");
+
+                    b.Property<long>("IdTypeJob");
+
+                    b.Property<int>("Rating");
+
+                    b.HasKey("IdHelp", "IdTypeJob");
+
+                    b.HasIndex("IdTypeJob");
+
+                    b.ToTable("HelpsTypesJob");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Job", b =>
+                {
+                    b.Property<int>("IdJob")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("IdJob");
+
+                    b.ToTable("Jobs");
                 });
 
             modelBuilder.Entity("NYHApp.Models.LineProposal", b =>
@@ -397,7 +476,8 @@ namespace NYHApp.Migrations
 
                     b.Property<DateTime>("DateLastModified");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<long>("IdEnterprise");
 
@@ -416,6 +496,22 @@ namespace NYHApp.Migrations
                     b.HasIndex("IdUserLastModified");
 
                     b.ToTable("Proposals");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.TypeJob", b =>
+                {
+                    b.Property<long>("IdTypeJob")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("IdJob");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("IdTypeJob");
+
+                    b.HasIndex("IdJob");
+
+                    b.ToTable("TypesJobs");
                 });
 
             modelBuilder.Entity("NYHApp.Models.TypeRoad", b =>
@@ -561,6 +657,32 @@ namespace NYHApp.Migrations
                         .HasForeignKey("IdUserLastModified");
                 });
 
+            modelBuilder.Entity("NYHApp.Models.EnterpriseJob", b =>
+                {
+                    b.HasOne("NYHApp.Models.Enterprise", "Enterprise")
+                        .WithMany("EnterprisesJobs")
+                        .HasForeignKey("IdEnterprise")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.Job", "Job")
+                        .WithMany("EnterprisesJobs")
+                        .HasForeignKey("IdJob")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NYHApp.Models.EnterpriseTypeJob", b =>
+                {
+                    b.HasOne("NYHApp.Models.Enterprise", "Enterprise")
+                        .WithMany("EnterprisesTypesJob")
+                        .HasForeignKey("IdEnterprise")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.TypeJob", "TypeJob")
+                        .WithMany("EnterprisesTypesJob")
+                        .HasForeignKey("IdTypeJob")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("NYHApp.Models.Help", b =>
                 {
                     b.HasOne("NYHApp.Models.Country", "Country")
@@ -581,6 +703,32 @@ namespace NYHApp.Migrations
                     b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
                         .WithMany()
                         .HasForeignKey("IdUserLastModified");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.HelpJob", b =>
+                {
+                    b.HasOne("NYHApp.Models.Help", "Help")
+                        .WithMany("HelpsJobs")
+                        .HasForeignKey("IdHelp")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.Job", "Job")
+                        .WithMany("HelpsJobs")
+                        .HasForeignKey("IdJob")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NYHApp.Models.HelpTypeJob", b =>
+                {
+                    b.HasOne("NYHApp.Models.Help", "Help")
+                        .WithMany("HelpsTypesJobs")
+                        .HasForeignKey("IdHelp")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.TypeJob", "TypeJob")
+                        .WithMany("HelpsTypesJobs")
+                        .HasForeignKey("IdTypeJob")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NYHApp.Models.LineProposal", b =>
@@ -617,11 +765,19 @@ namespace NYHApp.Migrations
                     b.HasOne("NYHApp.Models.Help", "Help")
                         .WithMany("Proposals")
                         .HasForeignKey("IdHelp")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("NYHApp.Models.ApplicationUser", "UserLastModified")
                         .WithMany()
                         .HasForeignKey("IdUserLastModified");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.TypeJob", b =>
+                {
+                    b.HasOne("NYHApp.Models.Job", "Job")
+                        .WithMany("TypesJob")
+                        .HasForeignKey("IdJob")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NYHApp.Models.ApplicationUser", b =>

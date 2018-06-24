@@ -23,40 +23,94 @@
             @Html.ValidationMessageFor(model => model.Help.Description, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-xs-12 col-md-2 col-lg-2">
-            <div class="checkbox">
-                <label>
-                    <input asp-for="Help.IsMansonry" /> @Html.DisplayNameFor(model => model.Help.IsMansonry)
-                </label>
+    <div class="row">
+        <label class="col-xs-12 col-md-3 col-lg-3">
+            <input asp-for="@Model.Help.IsPainting" class="changeDedication" id="isPainting" /> @Html.DisplayNameFor(model => model.Help.IsPainting)
+        </label>
+        <label class="col-xs-12 col-md-3 col-lg-3">
+            <input asp-for="@Model.Help.IsMansonry" class="changeDedication" id="isMansonry" /> @Html.DisplayNameFor(model => model.Help.IsMansonry)
+        </label>
+        <label class="col-xs-12 col-md-3 col-lg-3">
+            <input asp-for="@Model.Help.IsPlumbing" class="changeDedication" id="isPlumbing" /> @Html.DisplayNameFor(model => model.Help.IsPlumbing)
+        </label>
+        <label class="col-xs-12 col-md-3 col-lg-3">
+            <input asp-for="@Model.Help.IsElectricity" class="changeDedication" id="isElectricity" /> @Html.DisplayNameFor(model => model.Help.IsElectricity)
+        </label>
+
+        <div class="d-none col-xs-12 col-md-6 col-lg-6" id="tablePainting">
+            <div class="table-responsive">
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.LabelFor(z => z.Help.IsPainting)
+                            </th>
+                            <th>
+                                @Html.Label(NYHApp.Resources.Enterprise.Resource.Dedication)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.EditorFor(model => model.HelpsTypesJobPainting)
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="form-group col-xs-12 col-md-2 col-lg-2">
-            <div class="checkbox">
-                <label>
-                    <input asp-for="Help.IsPainting" /> @Html.DisplayNameFor(model => model.Help.IsPainting)
-                </label>
+        <div class="d-none col-xs-12 col-md-6 col-lg-6" id="tableMansonry">
+            <div class="table-responsive">
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.LabelFor(z => z.Help.IsMansonry)
+                            </th>
+                            <th>
+                                @Html.Label(NYHApp.Resources.Enterprise.Resource.Dedication)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.EditorFor(model => model.HelpsTypesJobMansonry)
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="form-group col-xs-12 col-md-2 col-lg-2">
-            <div class="checkbox">
-                <label>
-                    <input asp-for="Help.IsNewWork" /> @Html.DisplayNameFor(model => model.Help.IsNewWork)
-                </label>
+        <div class="d-none col-xs-12 col-md-6 col-lg-6" id="tablePlumbing">
+            <div class="table-responsive">
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.LabelFor(z => z.Help.IsPlumbing)
+                            </th>
+                            <th>
+                                @Html.Label(NYHApp.Resources.Enterprise.Resource.Dedication)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.EditorFor(model => model.HelpsTypesJobPlumbing)
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="form-group col-xs-12 col-md-2 col-lg-2">
-            <div class="checkbox">
-                <label>
-                    <input asp-for="Help.IsExtension" /> @Html.DisplayNameFor(model => model.Help.IsExtension)
-                </label>
-            </div>
-        </div>
-        <div class="form-group col-xs-12 col-md-2 col-lg-2">
-            <div class="checkbox">
-                <label>
-                    <input asp-for="Help.IsReform" /> @Html.DisplayNameFor(model => model.Help.IsReform)
-                </label>
+        <div class="d-none col-xs-12 col-md-6 col-lg-6" id="tableElectricity">
+            <div class="table-responsive">
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.LabelFor(z => z.Help.IsElectricity)
+                            </th>
+                            <th>
+                                @Html.Label(NYHApp.Resources.Enterprise.Resource.Dedication)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.EditorFor(model => model.HelpsTypesJobElectricity)
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -66,9 +120,9 @@
                 <i class="fa fa-plus"></i> @NYHApp.Resources.Photo.Resource.Photo
                 <input type="file" id="Photos" name="Photos" accept="image/jpg,image/png,image/jpeg,image/gif,application/pdf" multiple />
             </span>
-            <a class="btn btn-success" id="buttonVerImg" href="" target="_blank"><i class="fa fa-eye"> Ver</i></a>
+            <a class="btn btn-success d-none" id="buttonVerImg" href="" target="_blank"><i class="fa fa-eye"> Ver</i></a>
         </div>
-        <div id="listImages" class="col-md-6">
+        <div id="listImages" class="col-xs-12 col-md-12 col-lg-12">
         </div>
     </div>
     <div class="form-row">
@@ -137,12 +191,12 @@
             @Html.ValidationMessageFor(model => model.Help.Phone2, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-row col-xs-12 col-md-12 col-lg-12 mb-2 float-right">
+    <div class="form-row col-xs-12 col-md-12 col-lg-12 mb-2 pl-0 d-flex">
         <div class="col-xs-12 col-md-2 col-lg-2">
-            <a class="btn btn-default col-xs-12 col-md-12 col-lg-12 border-dark float-right" href="../"><i class="fas fa-ban"></i> @NYHApp.Resources.Shared.Resource.Cancel</a>
+            <a class="btn btn-secondary col-xs-12 col-md-12 col-lg-12 border-dark text-dark" href="/"><i class="fas fa-ban"></i> @NYHApp.Resources.Shared.Resource.Cancel</a>
         </div>
-        <div class="col-xs-12 col-md-2 col-lg-2 float-right">
-            <button type="submit" class="btn btn-primary col-xs-12 col-md-12 col-lg-12 float-right"><i class="far fa-save"></i> @NYHApp.Resources.Shared.Resource.Create</button>
+        <div class="col-xs-12 col-md-2 col-lg-2">
+            <button type="submit" class="btn btn-info col-xs-12 col-md-12 col-lg-12"><i class="far fa-save"></i> @NYHApp.Resources.Shared.Resource.Save</button>
         </div>
     </div>
 }
@@ -170,9 +224,9 @@
                         if (!existeImagen(theFile.name)) {
                             var span = document.createElement('span');
                             span.innerHTML = ['<img onclick="$(\'.activeImage\').removeClass(\'activeImage\');',
-                                '$(this).addClass(\'activeImage\'); actualizaBtn();" class="thumb" src="', e.target.result,
+                                '$(this).addClass(\'activeImage\');" class="thumb" src="', e.target.result,
                                 '" title="', escape(theFile.name), '"/>',
-                                '<input class="hidden" id="prueba" type="file" accept="image/jpg,image/png,image/jpeg,image/gif"/>'].join('');
+                                '<input class="d-none" id="prueba" type="file" accept="image/jpg,image/png,image/jpeg,image/gif"/>'].join('');
                             document.getElementById('listImages').insertBefore(span, null);
                         }
                     };
@@ -181,6 +235,29 @@
                 // Read in the image file as a data URL.
                 reader.readAsDataURL(f);
             }
+        }
+
+        $("img.thumb").on("click", function (e) {
+            e.preventDefault();
+            $(this).addClass("activeImage");
+        });
+
+
+        $("#files").change(function (e) {
+            e.preventDefault()
+            $("#buttonVerImg").attr('href', "").addClass("d-none");
+        })
+
+        function existeImagen(name) {
+            flag = false
+            $("#listImages").each(function (span) {
+                if ($(this).find('img').attr("title") == name) {
+                    flag = true;
+                }
+            });
+            if (flag)
+                return true
+            return false;
         }
     </script>
 }

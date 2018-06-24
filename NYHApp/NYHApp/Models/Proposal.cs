@@ -15,9 +15,11 @@ namespace NYHApp.Models
         public long IdProposal { get; set; }
 
         [Display(Name = "Description", ResourceType = typeof(Resources.Proposal.Resource))]
+        [Required(ErrorMessage = "Introduce una Descripción")]
         public string Description { get; set; }
 
         [Display(Name = "Total", ResourceType = typeof(Resources.Proposal.Resource))]
+        [Required(ErrorMessage = "Introduce un Total")]
         public decimal Total { get; set; }
 
         [Display(Name = "Help", ResourceType = typeof(Resources.Proposal.Resource))]

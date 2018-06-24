@@ -71,9 +71,25 @@ namespace NYHApp.Models
         [Display(Name = "Phone2", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string Phone2 { get; set; }
 
+        [EmailAddress]
+        [Required]
+        public string Email { get; set; }
+
         public string Latitute { get; set; }
 
         public string Longitude { get; set; }
+
+        [Display(Name = "IsMansonry", ResourceType = typeof(Resources.Help.Resource))]
+        public bool IsMansonry { get; set; }
+
+        [Display(Name = "IsPainting", ResourceType = typeof(Resources.Help.Resource))]
+        public bool IsPainting { get; set; }
+
+        [Display(Name = "IsPlumbing", ResourceType = typeof(Resources.Help.Resource))]
+        public bool IsPlumbing { get; set; }
+
+        [Display(Name = "IsElectricity", ResourceType = typeof(Resources.Help.Resource))]
+        public bool IsElectricity { get; set; }
 
         [Display(Name = "IdUserAdministrator", ResourceType = typeof(Resources.Enterprise.Resource))]
         public string IdUserAdministrator { get; set; }
@@ -89,5 +105,9 @@ namespace NYHApp.Models
         public virtual ICollection<ApplicationUser> Users { get; set; }
 
         public virtual ICollection<Proposal> Proposals { get; set; }
+
+        public virtual ICollection<EnterpriseJob> EnterprisesJobs { get; set; }
+
+        public virtual ICollection<EnterpriseTypeJob> EnterprisesTypesJob { get; set; }
     }
 }

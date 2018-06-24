@@ -3,92 +3,114 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="row mt-2">
-    <div class="col-xs-12 col-md-12 col-lg-4">
-        <div class="card bg-success mt-1">
-            <div class="card-body">
-                <div class="col-xs-6 col-md-6 col-lg-6">
-                    <img />
-                </div>
-                <div class="col-xs-6 col-md-6 col-lg-6 font-weight-bold">
-                    @User.Identity.Name
+<div class="row">
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="col-xs-12 col-md-12 col-lg-4 mt-3">
+            <div class="card bg-light">
+                @if (User.IsInRole("User"))
+                {
+                    <img class="card-img-top" src="~/images/user.svg" alt="Card image cap" height="250" width="250">
+                }
+                else
+                {
+                    <img class="card-img-top" src="~/images/enterprise.png" alt="Card image cap" height="250" width="250">
+                }
+                <div class="card-body text-center">
+                    @if (User.IsInRole("User"))
+                    {
+                        <h5 class="card-title">@User.Identity.Name</h5>
+                        <p class="card-text"> @NYHApp.Resources.Help.Resource.SearchHelp</p>
+                    }
+                    else
+                    {
+                        <h5 class="card-title">@User.Identity.Name</h5>
+                        <p class="card-text"> @NYHApp.Resources.Help.Resource.WantHelp</p>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 col-md-12 col-lg-8">
-        @foreach (var item in Model)
-        {
-            <div class="card bg-dark text-light mt-1">
-                <div class="card-header">
-                    <span class="text-left card-title">@Html.DisplayFor(modelItem => item.Title)</span>
-                </div>
-                <div class="card-body bg-light text-dark pb-0">
-                    <div class="col col-xs-12 col-md-6 col-lg-6">
-                        <span class="text-left">@Html.DisplayFor(modelItem => item.Description)</span>
-                    </div>
-                    <div class="col col-xs-12 col-md-6 col-lg-6">
-                        @if (item.Photos != null)
-                        {
-                            @foreach (var photo in item.Photos)
-                            {
-                                <img class="img-fluid rounded" src="@photo.Path" />
-                            }
-                        }
-                    </div>
-                    <div class="row col-xs-12 col-md-12 col-lg-12 mt-3 mb-0 pb-0 border-top">
-                        <div class="col-xs-12 col-md-2 col-lg-2">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.CheckBoxFor(model => item.IsMansonry) @Html.DisplayNameFor(model => item.IsMansonry)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-2 col-lg-2">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.CheckBoxFor(model => item.IsPainting) @Html.DisplayNameFor(model => item.IsPainting)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-2 col-lg-2">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.CheckBoxFor(model => item.IsNewWork) @Html.DisplayNameFor(model => item.IsNewWork)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-2 col-lg-2">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.CheckBoxFor(model => item.IsExtension) @Html.DisplayNameFor(model => item.IsExtension)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-2 col-lg-2">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.CheckBoxFor(model => item.IsReform) @Html.DisplayNameFor(model => item.IsReform)
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <a class="btn btn-default text-light" asp-action="Create" asp-controller="Proposals"><i class="fas fa-reply"></i></a>
-                        <a class="btn btn-default btnDetails" IdHelp="@item.IdHelp"><i class="fas fa-eye"></i></a>
-                        @if (User.IsInRole("User"))
-                        {
-                            <a class="btn btn-default text-light" asp-route-id="@item.IdHelp" asp-action="Edit" asp-controller="Helps"><i class="fas fa-pencil-alt"></i></a>
-                        }
-                        <a class="btn btn-default hddn"><i class="fas fa-times"></i></a>
-                    </div>
-                </div>
-            </div>
+        <div class="col-xs-12 col-md-12 col-lg-8">
 
-        }
-    </div>
+            @foreach (var item in Model)
+            {
+                <div class="card bg-dark text-light mt-3">
+                    <div class="card-header">
+                        <span class="text-left card-title">@Html.DisplayFor(modelItem => item.Title)</span>
+                    </div>
+                    <div class="card-body bg-light text-dark pb-0">
+                        <div class="col col-xs-12 col-md-6 col-lg-6">
+                            <span class="text-left">@Html.DisplayFor(modelItem => item.Description)</span>
+                        </div>
+                        <div class="col col-xs-12 col-md-6 col-lg-6">
+                            @if (item.Photos != null)
+                            {
+                                var contador = 0;
+                                @foreach (var item2 in item.Photos)
+                                {
+                                    contador++;
+                                    if (contador < 3)
+                                    {
+                                        <img src="@item2.Path" class="thumb" alt="@item2.FileName">
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="row col-xs-12 col-md-12 col-lg-12 mt-3 mb-0 pb-0 border-top">
+                            <div class="col-xs-12 col-md-3 col-lg-3">
+                                <div>
+                                    <label readonly="readonly">
+                                        @Html.CheckBoxFor(model => item.IsPainting, htmlAttributes: new { disabled = "disabled" }) @Html.DisplayNameFor(model => item.IsPainting)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-3 col-lg-3">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => item.IsMansonry, htmlAttributes: new { disabled = "disabled" }) @Html.DisplayNameFor(model => item.IsMansonry)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-3 col-lg-3">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => item.IsPlumbing, htmlAttributes: new { disabled = "disabled" }) @Html.DisplayNameFor(model => item.IsPlumbing)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-3 col-lg-3">
+                                <div>
+                                    <label>
+                                        @Html.CheckBoxFor(model => item.IsElectricity, htmlAttributes: new { disabled = "disabled" }) @Html.DisplayNameFor(model => item.IsElectricity)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            @if (!User.IsInRole("User"))
+                            {
+                                <a class="btn btn-default text-light" asp-action="Create" asp-controller="Proposals" asp-route-id="@item.IdHelp"><i class="fas fa-reply"></i></a>
+                            }
+                            <a class="btn btn-default btnDetails" IdHelp="@item.IdHelp"><i class="fas fa-eye"></i></a>
+                            @if (User.IsInRole("User"))
+                            {
+                                <a class="btn btn-default text-light" asp-route-id="@item.IdHelp" asp-action="Edit" asp-controller="Helps"><i class="fas fa-pencil-alt"></i></a>
+                            }
+                            <a class="btn btn-default hddn"><i class="fas fa-times"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center col-xs-12 col-md-12 col-lg-12 first" id="firstDiv">
+            <a class="btn btn-danger btn-lg font-weight-bold col-xs-12" asp-action="Create" asp-controller="Helps"> ¡@NYHApp.Resources.Help.Resource.CreateHelp!</a>
+        </div>
+    }
 </div>
 
 @section Scripts{
@@ -114,9 +136,15 @@
             });
         })
 
-        $('body').on('click', '.hddn', function (e) { 
+        $('body').on('click', '.hddn', function (e) {
             var h = (this).closest('.card-footer')
             $(this).closest('.card-footer').closest('.card').addClass('d-none')
+        })
+
+        $(document).ready(function () {
+            if ($('body').find(".main").find('#firstDiv').hasClass('first')) {
+                $("#myScrollspy").find('#btnHelp').addClass('d-none')
+            }
         })
     </script>
 }

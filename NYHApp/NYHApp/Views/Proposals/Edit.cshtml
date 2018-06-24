@@ -1,0 +1,56 @@
+﻿@model NYHApp.Models.Proposal
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Proposal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdProposal" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdHelp" class="control-label"></label>
+                <select asp-for="IdHelp" class="form-control" asp-items="ViewBag.IdHelp"></select>
+                <span asp-validation-for="IdHelp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEnterprise" class="control-label"></label>
+                <select asp-for="IdEnterprise" class="form-control" asp-items="ViewBag.IdEnterprise"></select>
+                <span asp-validation-for="IdEnterprise" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateLastModified" class="control-label"></label>
+                <input asp-for="DateLastModified" class="form-control" />
+                <span asp-validation-for="DateLastModified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUserLastModified" class="control-label"></label>
+                <select asp-for="IdUserLastModified" class="form-control" asp-items="ViewBag.IdUserLastModified"></select>
+                <span asp-validation-for="IdUserLastModified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

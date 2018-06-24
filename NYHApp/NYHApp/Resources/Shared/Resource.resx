@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>¿Estás seguro que desesas eliminar a</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
@@ -136,7 +139,7 @@
     <value>Registrar</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value />
+    <value>Eliminar</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Guardar</value>

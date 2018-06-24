@@ -61,6 +61,15 @@ namespace NYHApp.Resources.Shared {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Estás seguro que desesas eliminar a.
+        /// </summary>
+        public static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancelar.
         /// </summary>
         public static string Cancel {
@@ -115,7 +124,7 @@ namespace NYHApp.Resources.Shared {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a .
+        ///   Busca una cadena traducida similar a Eliminar.
         /// </summary>
         public static string Remove {
             get {

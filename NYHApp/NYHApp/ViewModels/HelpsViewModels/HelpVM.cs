@@ -12,5 +12,13 @@ namespace NYHApp.ViewModels
         public Help Help { get; set; }
 
         public List<IFormFile> Photos { get; set; }
+
+        public ICollection<HelpTypeJob> HelpsTypesJobPainting { get; set; }
+
+        public ICollection<HelpTypeJob> HelpsTypesJobMansonry { get; set; }
+
+        public ICollection<HelpTypeJob> HelpsTypesJobPlumbing { get; set; }
+
+        public ICollection<HelpTypeJob> HelpsTypesJobElectricity { get; set; }
     }
 }

@@ -132,6 +132,9 @@
   <data name="Country" xml:space="preserve">
     <value>Pais</value>
   </data>
+  <data name="Dedication" xml:space="preserve">
+    <value>Dedicación</value>
+  </data>
   <data name="Door" xml:space="preserve">
     <value>Puerta</value>
   </data>
@@ -144,8 +147,29 @@
   <data name="Floor" xml:space="preserve">
     <value>Planta</value>
   </data>
+  <data name="High" xml:space="preserve">
+    <value>Alta</value>
+  </data>
   <data name="IdUserAdministrator" xml:space="preserve">
     <value>Administrador</value>
+  </data>
+  <data name="IsElectricity" xml:space="preserve">
+    <value>Electricidad</value>
+  </data>
+  <data name="IsMansonry" xml:space="preserve">
+    <value>Albañileria</value>
+  </data>
+  <data name="IsPainting" xml:space="preserve">
+    <value>Pintura</value>
+  </data>
+  <data name="IsPlumbing" xml:space="preserve">
+    <value>Fontaneria</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Baja</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Media</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
@@ -155,6 +179,9 @@
   </data>
   <data name="NameProvince" xml:space="preserve">
     <value>Provincia</value>
+  </data>
+  <data name="Nothing" xml:space="preserve">
+    <value>Nada</value>
   </data>
   <data name="Number" xml:space="preserve">
     <value>Número</value>

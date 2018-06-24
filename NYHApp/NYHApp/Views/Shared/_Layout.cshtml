@@ -22,53 +22,49 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     </environment>
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar">
     @if (SignInManager.IsSignedIn(User))
     {
-        <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <div class="container d-flex justify-content-between">
-                <div>
-                    <a href="../" class="navbar-brand" id="logo">We Need Your Help</a>
+        <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-dark headerNav fixed-top" role="navigation"  id="myScrollspy">
+            <div class="container d-flex justify-content-lg-between justify-content-md-between align-items-center">
+                <div class="flex-row col-xs-12">
+                    <a href="../" class="navbar-brand logo" id="">We Need Your Help</a>
                 </div>
-                <div class="">
+                <div class="flex-row col-xs-12">
                     @if (User.IsInRole("User"))
                     {
-                        <a class="btn btn-danger btn-lg font-weight-bold" asp-action="Create" asp-controller="Helps"> ¡@NYHApp.Resources.Help.Resource.CreateHelp!</a>
+                        <a class="btn btn-danger btn-lg font-weight-bold col-xs-12" asp-action="Create" asp-controller="Helps" id="btnHelp"> ¡@NYHApp.Resources.Help.Resource.CreateHelp!</a>
                     }
                 </div>
-                <div>
+                <div class="flex-row col-xs-12">
                     @await Html.PartialAsync("_LoginPartial")
                 </div>
             </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="container mt-3 mb-5" style="padding-top:50px;">
+        </nav>
+        <div class="container mt-5 mb-5 border-left border-right border-info main">
             @RenderBody()
         </div>
     }
     else
     {
-        <div id="header" class="@*pt-0 mt-0 d-flex h-100*@">
-            <div class="header">
-                <div class="offset-md-8 offset-lg-8 justify-content-center align-self-center">
-                    <div class="card bg-light justify-content-center align-self-center mt-4">
-                        <div class="card-body">
-                            <div class="row mb-5">
-                                <div class="btn-group col-xs-12 col-md-12 col-lg-12">
-                                    <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="RegisterEnterprise">@NYHApp.Resources.Account.Resource.RegisterEnterprise</a>
-                                    <a class="btn btn-ligth border-dark" asp-area="" asp-controller="Account" asp-action="Register">@NYHApp.Resources.Account.Resource.Register</a>
-                                </div>
-                            </div>
-                            <a class="btn btn-light border-dark text-dark text-light btn-lg col-xs-12 col-dm-12 col-lg-12 font-weight-bold" id="loginButton">@NYHApp.Resources.Account.Resource.Login</a>
-                        </div>
-                    </div>
-                </div>
+        <div class="navbar navbar-expand-lg fixed-top cabecera">
+            <div class="col-xs-12 col-md-3 col-lg-3">
+                <button class="btn btn-dark border-dark text-light col-xs-12 col-md-12 col-lg-12 font-weight-bold rounded ModalNoData islg" data-href="/Account/RegisterEnterprise"><span class="align-middle">@NYHApp.Resources.Account.Resource.RegisterEnterprise</span></button>
             </div>
+            <div class="col-xs-12 col-md-2 col-lg-2">
+                <button class="btn btn-dark border-dark text-light col-xs-12 col-md-12 col-lg-12 font-weight-bold rounded ModalNoData islg" data-href="/Account/Register">@NYHApp.Resources.Account.Resource.Register</button>
+            </div>
+            <div class="col-xs-12 col-md-2 col-lg-2 ml-auto">
+                <button class="btn btn-dark border-dark text-light col-xs-12 col-md-12 col-lg-12 font-weight-bold rounded" id="loginButton"> @NYHApp.Resources.Account.Resource.Login</button>
+            </div>
+        </div>
+        <div id="header" class="header">
         </div>
         @RenderBody()
     }
+    <div class="clearfix"></div>
     <div id="modal"></div>
-    <footer id="footer" class="col-xs-12 col-md-12 col-lg-12 bg-dark text-light text-center">
+    <footer id="footer" class="col-xs-12 col-md-12 col-lg-12 bg-dark fixed-bottom text-light text-center">
         <div class="d-flex flex-row order-2 order-lg-3 ">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="#">@NYHApp.Resources.Shared.Resource.Contact</a></li>

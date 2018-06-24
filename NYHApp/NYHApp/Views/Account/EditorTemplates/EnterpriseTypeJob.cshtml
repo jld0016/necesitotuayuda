@@ -1,0 +1,26 @@
+﻿@model EnterpriseTypeJob
+
+<tr>
+    <td>
+        @Html.DisplayName(Model.TypeJob.Name)
+    </td>
+    <td>
+        @Html.HiddenFor(model => model.Rating, htmlAttributes: new { @class = "ratingValue" })
+        @Html.HiddenFor(model => model.IdTypeJob)
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="@Model.TypeJob.Name" id="@Model.TypeJob.Name" class="checkboxTypeJob" autocomplete="off" value="0" checked> @NYHApp.Resources.Enterprise.Resource.Nothing
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="@Model.TypeJob.Name" id="@Model.TypeJob.Name" class="checkboxTypeJob" value="1" autocomplete="off"> @NYHApp.Resources.Enterprise.Resource.Low
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="@Model.TypeJob.Name" id="@Model.TypeJob.Name" class="checkboxTypeJob" value="3" autocomplete="off"> @NYHApp.Resources.Enterprise.Resource.Medium
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="@Model.TypeJob.Name" id="@Model.TypeJob.Name" class="checkboxTypeJob" value="5" autocomplete="off"> @NYHApp.Resources.Enterprise.Resource.High
+            </label>
+        </div>
+    </td>
+</tr>
+

@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NYHApp.Data;
 using NYHApp.Models;
 using NYHApp.Services;
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
 
 namespace NYHApp
 {
@@ -32,6 +34,8 @@ namespace NYHApp
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(Directory.GetCurrentDirectory()));
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();

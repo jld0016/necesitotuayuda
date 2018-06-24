@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NYHApp.Data;
@@ -216,11 +218,7 @@ namespace NYHApp.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             ViewBag.TypeRoad = new SelectList(db.TypesRoad, "IdTypeRoad", "Name");
             ViewBag.Countries = new SelectList(db.Countries, "IdCountry", "Name");
-            RegisterViewModel model = new RegisterViewModel()
-            {
-                IsEnterprise = false
-            };
-            return View(model);
+            return PartialView();
         }
 
         [HttpGet]
@@ -230,17 +228,79 @@ namespace NYHApp.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             ViewBag.TypeRoad = new SelectList(db.TypesRoad, "IdTypeRoad", "Name");
             ViewBag.Countries = new SelectList(db.Countries, "IdCountry", "Name");
-            RegisterViewModel model = new RegisterViewModel()
+            var typesJobs = db.TypesJob.Include(z=>z.Job);
+            List<EnterpriseTypeJob> ListEnterpriseTypeJobs = new List<EnterpriseTypeJob>();
+            foreach(var item in typesJobs)
             {
-                IsEnterprise = true
+                EnterpriseTypeJob typeJob = new EnterpriseTypeJob()
+                {
+                    IdTypeJob = item.IdTypeJob,
+                    TypeJob = item,
+                    Rating = 0
+                };
+                ListEnterpriseTypeJobs.Add(typeJob);
+            }
+            RegisterEnterpriseViewModel model = new RegisterEnterpriseViewModel()
+            {
+                IsEnterprise = true,
+                EnterprisesTypesJobPainting = ListEnterpriseTypeJobs.Where(z=>z.TypeJob.Job.Name == "Pintura").ToList(),
+                EnterprisesTypesJobElectricity = ListEnterpriseTypeJobs.Where(z => z.TypeJob.Job.Name == "Electricidad").ToList(),
+                EnterprisesTypesJobMansonry = ListEnterpriseTypeJobs.Where(z => z.TypeJob.Job.Name == "Albañileria").ToList(),
+                EnterprisesTypesJobPlumbing = ListEnterpriseTypeJobs.Where(z => z.TypeJob.Job.Name == "Fontaneria").ToList(),
             };
-            return View("Register", model);
+            return PartialView("RegisterEnterprise", model);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Address = model.Address,
+                    City = model.City,
+                    IdCountry = model.IdCountry,
+                    Door = model.Door,
+                    Floor = model.Floor,
+                    State = model.State,
+                    IdTypeRoad = model.IdTypeRoad,
+                    Name = model.Name,
+                    NIF = model.NIF,
+                    Number = model.Number,
+                    Phone1 = model.Phone1,
+                    Phone2 = model.Phone2,
+                    PostalCode = model.PostalCode,
+                    Surname1 = model.Surname1,
+                    Surname2 = model.Surname2,
+                    DateLastModified = DateTime.Now
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(model.UserName), "User");
+                    _logger.LogInformation("User created a new account with password.");
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created a new account with password.");
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterEnterprise(RegisterEnterpriseViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -289,10 +349,22 @@ namespace NYHApp.Controllers
                         PostalCode = model.EnterprisePostalCode,
                         State = model.EnterpriseState,
                         UnstructuredAddress = model.EnterpriseUnstructuredAddress,
-                        DateLastModified = DateTime.Now
+                        DateLastModified = DateTime.Now,
+                        Email = model.Email
                     };
                     user.Enterprise = enterprise;
-                }
+                    user.Enterprise.IsElectricity = model.IsElectricity;
+                    user.Enterprise.IsMansonry = model.IsMansonry;
+                    user.Enterprise.IsPainting = model.IsPainting;
+                    user.Enterprise.IsPlumbing = model.IsPlumbing;
+                    user.Enterprise.EnterprisesTypesJob = new List<EnterpriseTypeJob>();
+                    AddToCollection(model.EnterprisesTypesJobPainting, user.Enterprise.EnterprisesTypesJob);
+                    AddToCollection(model.EnterprisesTypesJobElectricity, user.Enterprise.EnterprisesTypesJob);
+                    AddToCollection(model.EnterprisesTypesJobPlumbing, user.Enterprise.EnterprisesTypesJob);
+                    AddToCollection(model.EnterprisesTypesJobMansonry, user.Enterprise.EnterprisesTypesJob);
+                }                
+
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -312,7 +384,7 @@ namespace NYHApp.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return Redirect("/Helps/Index");
                 }
                 AddErrors(result);
             }
@@ -321,6 +393,14 @@ namespace NYHApp.Controllers
             return View(model);
         }
 
+
+        private void AddToCollection(IEnumerable<EnterpriseTypeJob> collection, ICollection<EnterpriseTypeJob> ListEnterpriseJob)
+        {
+            foreach (var item in collection)
+            {
+                ListEnterpriseJob.Add(item);
+            }
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()

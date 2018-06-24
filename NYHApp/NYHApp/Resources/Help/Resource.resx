@@ -132,28 +132,46 @@
   <data name="Date" xml:space="preserve">
     <value>Fecha</value>
   </data>
+  <data name="Dedication" xml:space="preserve">
+    <value>Dedicación</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>
-  <data name="IsExtension" xml:space="preserve">
-    <value>Amplicación</value>
+  <data name="High" xml:space="preserve">
+    <value>Alta</value>
+  </data>
+  <data name="IsElectricity" xml:space="preserve">
+    <value>Electricidad</value>
   </data>
   <data name="IsMansonry" xml:space="preserve">
     <value>Albañileria</value>
   </data>
-  <data name="IsNewWork" xml:space="preserve">
-    <value>Obra Nueva</value>
-  </data>
   <data name="IsPainting" xml:space="preserve">
     <value>Pintura</value>
   </data>
-  <data name="IsReform" xml:space="preserve">
-    <value>Reforma</value>
+  <data name="IsPlumbing" xml:space="preserve">
+    <value>Fontaneria</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Baja</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Nothing" xml:space="preserve">
+    <value>Nada</value>
+  </data>
+  <data name="SearchHelp" xml:space="preserve">
+    <value>Está buscando ayuda</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Título</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Usuario</value>
+  </data>
+  <data name="WantHelp" xml:space="preserve">
+    <value>Quiere ayudar</value>
   </data>
 </root>
