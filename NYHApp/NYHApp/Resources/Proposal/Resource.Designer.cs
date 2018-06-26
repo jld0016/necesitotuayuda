@@ -61,6 +61,15 @@ namespace NYHApp.Resources.Proposal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Estás seguro que deseas eliminar la propuesta de.
+        /// </summary>
+        public static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Descripción.
         /// </summary>
         public static string Description {
@@ -84,6 +93,15 @@ namespace NYHApp.Resources.Proposal {
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Propuesta.
+        /// </summary>
+        public static string LinesProposal {
+            get {
+                return ResourceManager.GetString("LinesProposal", resourceCulture);
             }
         }
         

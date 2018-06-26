@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NYHApp.Controllers;
 using NYHApp.Data;
 using NYHApp.Models;
@@ -32,7 +33,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             if(UserName != null)
             {
-                return _context.Users.Where(z => z.UserName == UserName).FirstOrDefault();
+                return _context.Users.Include(z=>z.Enterprise).ThenInclude(z=>z.EnterprisesTypesJob).Where(z => z.UserName == UserName).FirstOrDefault();
             }
             return new ApplicationUser();
         }

@@ -1,0 +1,30 @@
+﻿@model NYHApp.Models.Help
+
+@{
+    Layout = "/Views/Shared/TemplateModal.cshtml";
+    ViewData["Title"] = "Close Proposal";
+}
+
+@using (Html.BeginForm("CloseProposal", "Help", FormMethod.Post, new { @class = "form-group", id = "CloseProposal" }))
+{
+    @Html.HiddenFor(model => model.IdProposalClose)
+    @Html.HiddenFor(model => model.IdHelp)
+    <div class="modal-header bg-dark text-light">
+        <label class="modal-title col-xs-8 col-md-8 col-lg-8">@NYHApp.Resources.Shared.Resource.Close</label>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            @NYHApp.Resources.Help.Resource.AreYouSureCloseProposal @Model.Title
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <a class="btn btn-secondary border-dark" data-dismiss="modal">@NYHApp.Resources.Shared.Resource.Cancel</a>
+            <button type="button" id="btnClose" class="btn btn-success"><i class="fas fa-check"></i> @NYHApp.Resources.Help.Resource.CloseProposal</button>
+        </div>
+    </div>
+}
+

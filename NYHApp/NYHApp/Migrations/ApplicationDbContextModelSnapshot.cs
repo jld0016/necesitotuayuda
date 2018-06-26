@@ -326,6 +326,8 @@ namespace NYHApp.Migrations
 
                     b.Property<int>("IdCountry");
 
+                    b.Property<long?>("IdProposalClose");
+
                     b.Property<int>("IdTypeRoad");
 
                     b.Property<string>("IdUser")
@@ -365,6 +367,8 @@ namespace NYHApp.Migrations
                     b.HasKey("IdHelp");
 
                     b.HasIndex("IdCountry");
+
+                    b.HasIndex("IdProposalClose");
 
                     b.HasIndex("IdTypeRoad");
 
@@ -496,6 +500,19 @@ namespace NYHApp.Migrations
                     b.HasIndex("IdUserLastModified");
 
                     b.ToTable("Proposals");
+                });
+
+            modelBuilder.Entity("NYHApp.Models.Rating", b =>
+                {
+                    b.Property<int>("RatingEnterprise");
+
+                    b.Property<int>("RatingHelp");
+
+                    b.Property<long>("TotalRating");
+
+                    b.HasKey("RatingEnterprise", "RatingHelp");
+
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("NYHApp.Models.TypeJob", b =>
@@ -689,6 +706,10 @@ namespace NYHApp.Migrations
                         .WithMany("Helps")
                         .HasForeignKey("IdCountry")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NYHApp.Models.Proposal", "ProposalClose")
+                        .WithMany()
+                        .HasForeignKey("IdProposalClose");
 
                     b.HasOne("NYHApp.Models.TypeRoad", "TypeRoad")
                         .WithMany()

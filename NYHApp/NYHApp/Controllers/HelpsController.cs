@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using NYHApp.Data;
 using NYHApp.Models;
 using NYHApp.ViewModels;
+using NYHApp.ViewModels.HelpsViewModels;
+using NYHApp.ViewModels.ProposalsViewModels;
 
 namespace NYHApp.Controllers
 {
@@ -30,17 +32,107 @@ namespace NYHApp.Controllers
         // GET: Helps
         public IActionResult Index()
         {
-            ICollection<Help> model = _context.Helps.Include(z => z.UserHelp).Include(z=>z.Photos).ToList();
-            if (User.IsInRole("User") && model != null && model.Count > 0)
+            ICollection<Help> ListHelps = _context.Helps.Include(z => z.UserHelp).Include(z=>z.HelpsTypesJobs).Include(z => z.Photos).Include(z=>z.Proposals).ToList();
+            HelpIndexVM model = new HelpIndexVM();
+            List<HelpRating> ListHelpsRating = new List<HelpRating>();
+            var ActualUser = UrlHelperExtensions.GetUserLogin(User.Identity.Name, _context);
+            if (ActualUser != null)
             {
-                var ActualUser = UrlHelperExtensions.GetUserLogin(User.Identity.Name, _context);
+                if (User.IsInRole("User") && ListHelps != null && ListHelps.Count > 0)
+                {
+                    ListHelps = ListHelps.Where(z => z.UserHelp.Id == ActualUser.Id).ToList();
+                    foreach (var item in ListHelps)
+                    {
+                        HelpRating h = new HelpRating()
+                        {
+                            Help = item,
+                            Rating = 1
+                        };
+                        ListHelpsRating.Add(h);
+                    }
+                    model.ListHelp = ListHelpsRating.OrderByDescending(z => z.Help.Date).ToList();
+                    return View(model);
+                }
+                else
+                {
+                    ViewBag.IdEnterprise = ActualUser.IdEnterprise;
+                    foreach(var item in ListHelps)
+                    {
+                        HelpRating h = new HelpRating()
+                        {
+                            Help = item,
+                            Rating = getRatingHelp(item, ActualUser)
+                        };
+                        ListHelpsRating.Add(h);
+                    }
+                    model.ListHelp = ListHelpsRating.OrderByDescending(z => z.Rating).ToList();
+                    return View(model);
+                }
+            }
+            else
+            {
+                Redirect("/Account/Logout");
+            }
+            if (ListHelps == null)
+                return View(new List<HelpIndexVM>());
+            return View(model);
+        }
 
-                model = model.Where(z => z.UserHelp.Id == ActualUser.Id).ToList();
+        [HttpPost]
+        public IActionResult Index(HelpIndexVM modelFilter)
+        {
+            HelpIndexVM model = new HelpIndexVM();
+            List<HelpRating> ListHelpsRating = new List<HelpRating>();
+            var ActualUser = UrlHelperExtensions.GetUserLogin(User.Identity.Name, _context);
+            if (modelFilter.Filter != null && !User.IsInRole("User"))
+            {
+                ICollection<Help> ListHelps = _context.Helps.Include(z => z.UserHelp).Include(z => z.HelpsTypesJobs).Include(z => z.Photos).ToList();
+                ListHelps = applyFilter(ListHelps, modelFilter.Filter);
+                foreach (var item in ListHelps)
+                {
+                    HelpRating h = new HelpRating()
+                    {
+                        Help = item,
+                        Rating = getRatingHelp(item, ActualUser)
+                    };
+                    ListHelpsRating.Add(h);
+                }
+                model.ListHelp = ListHelpsRating.OrderByDescending(z => z.Rating).ToList();
+                model.Filter = modelFilter.Filter;
                 return View(model);
             }
-            if (model == null)
-                return View(new List<Help>());
-            return View(model);
+            return View(modelFilter);
+        }
+
+        private long getRatingHelp(Help help, ApplicationUser user)
+        {
+            long rating = 0;
+            List<Rating> ratings = _context.Ratings.ToList();
+            foreach(var item in help.HelpsTypesJobs)
+            {
+                long ratingEnterprise = user.Enterprise.EnterprisesTypesJob.Where(z => z.IdTypeJob == item.IdTypeJob).FirstOrDefault().Rating;
+                rating = rating + ratings.Where(z => z.RatingHelp == item.Rating && z.RatingEnterprise == ratingEnterprise).FirstOrDefault().TotalRating;
+            }
+            return rating;
+        }
+
+        private ICollection<Help> applyFilter(ICollection<Help> ListHelps, FilterHelp Filter)
+        {
+            if(Filter.Title != null && Filter.Title != "")
+                ListHelps = ListHelps.Where(z => z.Title.ToLower().Contains(Filter.Title.ToLower().Trim())).ToList();
+            if (Filter.Description != null && Filter.Description != "")
+                ListHelps = ListHelps.Where(z => z.Description.ToLower().Contains(Filter.Description.ToLower().Trim())).ToList();            
+            if (Filter.IsElectricity)
+                ListHelps = ListHelps.Where(z => z.IsElectricity).ToList();
+            if (Filter.IsMansonry)
+                ListHelps = ListHelps.Where(z => z.IsMansonry).ToList();
+            if (Filter.IsPlumbing)
+                ListHelps = ListHelps.Where(z => z.IsPlumbing).ToList();
+            if (Filter.IsPainting)
+                ListHelps = ListHelps.Where(z => z.IsPainting).ToList();
+            if (Filter.Photos)
+                ListHelps = ListHelps.Where(z => z.Photos != null && z.Photos.Count() > 0).ToList();
+            return ListHelps;
         }
 
         public async Task<IActionResult> Details(long? id)
@@ -50,7 +142,7 @@ namespace NYHApp.Controllers
                 return NotFound();
             }
 
-            var help = await _context.Helps.Include(z=>z.Photos).SingleOrDefaultAsync(m => m.IdHelp == id);
+            var help = await _context.Helps.Include(z => z.Photos).SingleOrDefaultAsync(m => m.IdHelp == id);
             if (help == null)
             {
                 return NotFound();
@@ -168,9 +260,9 @@ namespace NYHApp.Controllers
                     FileName = fileName,
                     DateUpload = DateTime.Now,
                     IdUserLastModified = actualUser.Id,
-                    Path = "/Photos/" + actualUser.Id + '/' +fileName
+                    Path = "/Photos/" + actualUser.Id + '/' + fileName
                 };
-                using (var stream = new FileStream(path + '/' +  fileName, FileMode.CreateNew,FileAccess.ReadWrite))
+                using (var stream = new FileStream(path + '/' + fileName, FileMode.CreateNew, FileAccess.ReadWrite))
                 {
                     item.CopyTo(stream);
                     model.Help.Photos.Add(photo);
@@ -200,7 +292,7 @@ namespace NYHApp.Controllers
         // GET: Helps/Edit/5
         public async Task<IActionResult> Edit(long id)
         {
-            var help = await _context.Helps.Include(z=>z.Photos).Include(z=>z.HelpsTypesJobs).ThenInclude(z=>z.TypeJob).ThenInclude(z=>z.Job).SingleOrDefaultAsync(m => m.IdHelp == id);
+            var help = await _context.Helps.Include(z=>z.Proposals).Include(z => z.Photos).Include(z => z.HelpsTypesJobs).ThenInclude(z => z.TypeJob).ThenInclude(z => z.Job).SingleOrDefaultAsync(m => m.IdHelp == id);
             if (help == null)
             {
                 return NotFound();
@@ -258,6 +350,56 @@ namespace NYHApp.Controllers
             ViewData["Help.IdCountry"] = new SelectList(_context.Countries, "IdCountry", "Name", model.Help.IdCountry);
             ViewData["Help.IdTypeRoad"] = new SelectList(_context.TypesRoad, "IdTypeRoad", "Name", model.Help.IdTypeRoad);
             return View(model);
+        }
+
+        public IActionResult ViewProposal(long id)
+        {
+            var proposal =  _context.Proposals
+                .Include(p => p.Enterprise)
+                .Include(p => p.Help).ThenInclude(z => z.HelpsTypesJobs).ThenInclude(z => z.TypeJob).ThenInclude(z => z.Job)
+                .Include(p => p.Help).ThenInclude(z => z.TypeRoad)
+                .Include(p => p.Help).ThenInclude(z => z.Photos)
+                .Include(z => z.LinesProposals)
+                .Include(p => p.UserLastModified)
+                .FirstOrDefault(m => m.IdProposal == id);
+            if (proposal == null)
+            {
+                return NotFound();
+            }
+
+            ProposalHelpViewModel model = new ProposalHelpViewModel()
+            {
+                Proposal = proposal,
+                HelpsTypesJobElectricity = proposal.Help.HelpsTypesJobs.Where(z => z.TypeJob.Job.Name == "Electricidad").ToList(),
+                HelpsTypesJobPainting = proposal.Help.HelpsTypesJobs.Where(z => z.TypeJob.Job.Name == "Pintura").ToList(),
+                HelpsTypesJobPlumbing = proposal.Help.HelpsTypesJobs.Where(z => z.TypeJob.Job.Name == "Fontaneria").ToList(),
+                HelpsTypesJobMansonry = proposal.Help.HelpsTypesJobs.Where(z => z.TypeJob.Job.Name == "Albañileria").ToList(),
+            };
+
+            return View(model);
+        }
+
+        public IActionResult CloseProposal(long id)
+        {
+            var Help = _context.Proposals.Include(z=>z.Help).FirstOrDefault(m => m.IdProposal == id).Help;
+            Help.IdProposalClose = id;
+            if(Help == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Help); 
+        }
+
+        [HttpPost]
+        public IActionResult CloseProposal(long IdHelp, long IdProposalClose)
+        {
+            var Help = _context.Helps.FirstOrDefault(m => m.IdHelp == IdHelp);
+            Help.IdProposalClose = IdProposalClose;
+            Help.Close = true;
+            Help.CloseDate = DateTime.Now;
+            _context.Update(Help);
+            _context.SaveChanges();
+            return RedirectToAction("Helps/Index");
         }
 
         private void UpdateCollection(ICollection<HelpTypeJob> collection)

@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AreYouSureCloseProposal" xml:space="preserve">
+    <value>Estás seguro que deseas cerrar la propuesta para </value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Cerrada</value>
   </data>
   <data name="CloseDate" xml:space="preserve">
     <value>Fecha de Cierre</value>
+  </data>
+  <data name="CloseProposal" xml:space="preserve">
+    <value>Cerrar Propuesta</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contacto</value>
@@ -137,6 +143,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtros</value>
   </data>
   <data name="High" xml:space="preserve">
     <value>Alta</value>
@@ -161,6 +170,9 @@
   </data>
   <data name="Nothing" xml:space="preserve">
     <value>Nada</value>
+  </data>
+  <data name="Photos" xml:space="preserve">
+    <value>Fotografias</value>
   </data>
   <data name="SearchHelp" xml:space="preserve">
     <value>Está buscando ayuda</value>

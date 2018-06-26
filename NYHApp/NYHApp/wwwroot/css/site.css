@@ -1,8 +1,4 @@
-﻿/*body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}*/
-
+﻿
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -41,35 +37,40 @@
 }
 
 .cabecera {
-    background:rgba(255,255,255,.5);
-    z-index:999;
+    background: rgba(255,255,255,.5);
+    z-index: 999;
 }
 
 .header {
     background-image: url(/images/banner.png);
     background-size: cover;
-    height: 1080px !important;
     -webkit-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
     border: 0px;
     border-radius: 0px;
-    width:100% !important;
+    width: 100% !important;
+    height:550px;
 }
 
-.btnHeader{
-    min-height:55px;
+.btnHeader {
+    min-height: 55px;
 }
 
 .logo {
     font-family: 'Cabin Sketch', cursive;
     font-size: xx-large;
 }
+
 .main {
     padding-top: 50px;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
 }
-label{
-    font-weight:bold;
+
+label {
+    font-weight: bold;
 }
 
 .thumb {
@@ -100,3 +101,15 @@ label{
         cursor: inherit;
         display: block;
     }
+
+.img-index {
+    max-height: 250px;
+    max-width: 250px;
+}
+
+
+.bgbrown {
+    background-image: url(../images/brown-bg.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

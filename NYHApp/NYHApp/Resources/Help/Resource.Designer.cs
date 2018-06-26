@@ -61,6 +61,15 @@ namespace NYHApp.Resources.Help {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Estás seguro que deseas cerrar la propuesta para .
+        /// </summary>
+        public static string AreYouSureCloseProposal {
+            get {
+                return ResourceManager.GetString("AreYouSureCloseProposal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cerrada.
         /// </summary>
         public static string Close {
@@ -75,6 +84,15 @@ namespace NYHApp.Resources.Help {
         public static string CloseDate {
             get {
                 return ResourceManager.GetString("CloseDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar Propuesta.
+        /// </summary>
+        public static string CloseProposal {
+            get {
+                return ResourceManager.GetString("CloseProposal", resourceCulture);
             }
         }
         
@@ -120,6 +138,15 @@ namespace NYHApp.Resources.Help {
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Filtros.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
             }
         }
         
@@ -192,6 +219,15 @@ namespace NYHApp.Resources.Help {
         public static string Nothing {
             get {
                 return ResourceManager.GetString("Nothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fotografias.
+        /// </summary>
+        public static string Photos {
+            get {
+                return ResourceManager.GetString("Photos", resourceCulture);
             }
         }
         

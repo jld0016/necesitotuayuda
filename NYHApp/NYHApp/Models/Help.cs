@@ -101,6 +101,10 @@ namespace NYHApp.Models
         [Display(Name = "CloseDate", ResourceType = typeof(Resources.Help.Resource))]
         public DateTime? CloseDate { get; set; }
 
+        public long? IdProposalClose { get; set; }
+
+        public virtual Proposal ProposalClose { get; set; }
+
         public DateTime DateLastModified { get; set; }
 
         public string IdUserLastModified { get; set; }

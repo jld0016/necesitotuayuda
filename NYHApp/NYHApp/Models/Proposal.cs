@@ -38,6 +38,7 @@ namespace NYHApp.Models
 
         public ApplicationUser UserLastModified { get; set; }
 
+        [Display(Name = "LinesProposal", ResourceType = typeof(Resources.Proposal.Resource))]
         public virtual ICollection<LineProposal> LinesProposals { get; set; }
     }
 }

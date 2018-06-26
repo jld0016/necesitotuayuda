@@ -29,6 +29,8 @@ namespace NYHApp.Data
 
         public DbSet<TypeJob> TypesJob { get; set; }
 
+        public DbSet<Rating> Ratings { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -52,7 +54,7 @@ namespace NYHApp.Data
             HelpTypeJobConfiguration(modelBuilder);
             EnterpriseJobConfiguration(modelBuilder);
             EnterpriseTypeJobConfiguration(modelBuilder);
-
+            RatingsConfiguration(modelBuilder);
         }
 
         private void UsersConfiguration(ModelBuilder modelBuilder)
@@ -78,6 +80,7 @@ namespace NYHApp.Data
         {
             modelBuilder.Entity<Help>().HasOne(f => f.Country).WithMany(z => z.Helps).HasForeignKey(f => f.IdCountry);
             modelBuilder.Entity<Help>().HasOne(f => f.TypeRoad).WithMany().HasForeignKey(f => f.IdTypeRoad);
+            modelBuilder.Entity<Help>().HasOne(f => f.ProposalClose).WithMany().HasForeignKey(f => f.IdProposalClose);
             modelBuilder.Entity<Help>().HasOne(f => f.UserHelp).WithMany(f => f.Helps).HasForeignKey(f => f.IdUser).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Help>().HasOne(f => f.UserLastModified).WithMany().HasForeignKey(f => f.IdUserLastModified);
         }
@@ -132,6 +135,11 @@ namespace NYHApp.Data
             modelBuilder.Entity<EnterpriseTypeJob>().HasKey(f => new { f.IdTypeJob, f.IdEnterprise });
             modelBuilder.Entity<EnterpriseTypeJob>().HasOne(f => f.Enterprise).WithMany(f => f.EnterprisesTypesJob).HasForeignKey(f => f.IdEnterprise).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<EnterpriseTypeJob>().HasOne(f => f.TypeJob).WithMany(f => f.EnterprisesTypesJob).HasForeignKey(f => f.IdTypeJob).OnDelete(DeleteBehavior.Cascade);
+        }
+
+        private void RatingsConfiguration(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Rating>().HasKey(f => new { f.RatingEnterprise, f.RatingHelp });
         }
     }
 }

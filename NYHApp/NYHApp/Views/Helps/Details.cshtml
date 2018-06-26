@@ -18,42 +18,19 @@
             @Html.LabelFor(model => model.Description, new { @class = "control-label col-xs-12 col-md-12 col-lg-12" })
             <span class="col-xs-12 col-md-12 col-lg-12 pt-0">@Html.DisplayFor(model => model.Description)</span>
         </div>
-        <div class="form-row">
-            <div class="form-group col-xs-12 col-md-2 col-lg-2">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsMansonry" /> @Html.DisplayNameFor(model => model.IsMansonry)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group col-xs-12 col-md-2 col-lg-2">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsPainting" /> @Html.DisplayNameFor(model => model.IsPainting)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group col-xs-12 col-md-2 col-lg-2">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsNewWork" /> @Html.DisplayNameFor(model => model.IsNewWork)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group col-xs-12 col-md-2 col-lg-2">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsExtension" /> @Html.DisplayNameFor(model => model.IsExtension)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group col-xs-12 col-md-2 col-lg-2">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsReform" /> @Html.DisplayNameFor(model => model.IsReform)
-                    </label>
-                </div>
-            </div>
+        <div class="row">
+            <label class="col-xs-12 col-md-3 col-lg-3">
+                <input asp-for="@Model.IsPainting" class="changeDedication" id="isPainting" disabled/> @Html.DisplayNameFor(model => model.IsPainting)
+            </label>
+            <label class="col-xs-12 col-md-3 col-lg-3">
+                <input asp-for="@Model.IsMansonry" class="changeDedication" id="isMansonry" disabled/> @Html.DisplayNameFor(model => model.IsMansonry)
+            </label>
+            <label class="col-xs-12 col-md-3 col-lg-3">
+                <input asp-for="@Model.IsPlumbing" class="changeDedication" id="isPlumbing" disabled/> @Html.DisplayNameFor(model => model.IsPlumbing)
+            </label>
+            <label class="col-xs-12 col-md-3 col-lg-3">
+                <input asp-for="@Model.IsElectricity" class="changeDedication" id="isElectricity" disabled/> @Html.DisplayNameFor(model => model.IsElectricity)
+            </label>
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-12" id="listImages">
@@ -83,11 +60,12 @@
                 }
             </div>
         </div>
-        <div class=""></div>
     }
 </div>
 <div class="modal-footer">
-    <a class="btn btn-secondary" data-dismiss="modal">@NYHApp.Resources.Shared.Resource.Close</a>
+    <div class="col-xs-12 col-md-2 col-lg-2">
+        <a class="btn btn-secondary col-xs-12 col-md-12 col-lg-12 border-dark text-dark" href="/"><i class="fas fa-ban"></i> @NYHApp.Resources.Shared.Resource.Close</a>
+    </div>
 </div>
 
 @section Scripts{

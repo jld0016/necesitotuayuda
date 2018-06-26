@@ -120,6 +120,9 @@
   <data name="AreYouSure" xml:space="preserve">
     <value>¿Estás seguro que desesas eliminar a</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Atras</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>

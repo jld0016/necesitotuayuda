@@ -1,57 +1,28 @@
 ﻿@model NYHApp.Models.Proposal
 
 @{
+    Layout = "/Views/Shared/TemplateModal.cshtml";
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Proposal</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateLastModified)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateLastModified)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Enterprise)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Enterprise.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Help)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Help.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UserLastModified)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserLastModified.Id)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdProposal" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+@using (Html.BeginForm("Delete", "Proposals", FormMethod.Post, new { @class = "form-group", id = "DeleteForm" }))
+{
+    @Html.HiddenFor(model => model.IdProposal)
+    <div class="modal-header bg-dark text-light">
+        <label class="modal-title col-xs-8 col-md-8 col-lg-8">@NYHApp.Resources.Shared.Resource.Remove</label>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            @NYHApp.Resources.Proposal.Resource.AreYouSure @Model.Help.Title ?
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <a class="btn btn-secondary border-dark" data-dismiss="modal">@NYHApp.Resources.Shared.Resource.Cancel</a>
+            <button type="submit" class="btn btn-danger">@NYHApp.Resources.Shared.Resource.Remove</button>
+        </div>
+    </div>
+}
